@@ -1,27 +1,31 @@
 
-import { BrowserRouter, Switch, Route  } from 'react-router-dom'
+import { BrowserRouter, Route, Routes  } from 'react-router-dom'
 import './App.css'
-import GuestRoute from './Path/GuestRoute'
-import PrivateRoute from './Path/PrivateRoute'
-import Login from './Auth/Login'
+import React from 'react'
 import Home from './Pages/Home'
+import { useSelector } from 'react-redux'
+import Login from './Auth/Login'
+import { isAuthSelector } from './RTK/Services/AuthSlice'
 
-function App() {
+const App = ()=> {
+
+  const isAuth = useSelector(isAuthSelector);
+ 
 
   return (
     <BrowserRouter>
-    <Switch>
-      <Route path="/" exact children={<Home />} />
+      <Routes>
+        {
+          !isAuth && <>
+                        <Route exact path='/' element={<Home/>} />
+                    </>
+        }{
+          isAuth &&   <Route exact path='/' element={ <Login/> } />
 
-      <GuestRoute path="/login" children={
-      <Login />
-      } />
-      <PrivateRoute path="/home" children={
-
-      <Home />
+        }
+        
+      </Routes>
       
-      } />
-    </Switch>
   </BrowserRouter>
   )
 }
