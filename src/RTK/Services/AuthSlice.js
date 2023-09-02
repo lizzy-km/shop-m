@@ -13,6 +13,7 @@ const AuthSlice = createSlice({
       },
     },
   })
+  export const isAuthSelector = state => state.user !== null;
 
     export const { AddUser } = AuthSlice.actions
     export default AuthSlice.reducer
