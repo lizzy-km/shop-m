@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const fakeAuthApi = createApi({
   
-  reducerPath: 'authApi',
+  reducerPath: 'fakeAuthApi',
   baseQuery: fetchBaseQuery({
      baseUrl: 'https://fakestoreapi.com/auth/', 
     }),
@@ -15,9 +15,12 @@ export const fakeAuthApi = createApi({
         query:(user) =>({
             url:'/login',
             method:'POST',
-            body:user,
+            body:JSON.stringify({
+              username:`${user.username}`,
+              password:`${user.password}`
+            }),
         }),
-        invalidatesTags:["auth"]
+        invalidatesTags:["fakeAuth"]
     }),
 
     

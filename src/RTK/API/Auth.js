@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-const token = '4014|u4yp9RlCwObTqWeu9SoKIEnhAUXd90FsosqjEEYT'
+const token = '4670|YJruWtMUezqugaMyItredXeTKephtz6Dq4SR1uUh'
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
@@ -22,13 +22,13 @@ export const authApi = createApi({
     }),
 
     login: builder.mutation({
-        query:(user) =>({
-            url:'/login',
-            method:'POST',
-            body:user,
-        }),
-        invalidatesTags:["auth"]
-    }),
+      query:(user) =>({
+          url:'/login',
+          method:'POST',
+          body:user,
+      }),
+      invalidatesTags:["auth"]
+  }),
 
     logout: builder.mutation({
       query:() =>({
@@ -36,11 +36,30 @@ export const authApi = createApi({
         method:'POST',
         headers:{Authorization: `Bearer ${token}` },
     }),
-    })
+    }),
+    Contact: builder.mutation({
+      query:(contact) =>({
+          url:'/contact',
+          method:'POST',
+          body:contact,
+          headers:{Authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags:["auth"]
   }),
+  getContact: builder.query({
+    query:(id) =>({
+        url:`/contact/${id}`,
+        method:'GET',
+        
+        headers:{Authorization: `Bearer ${token}` },
+    }),
+    providesTags:["auth"]
+}),
+  
+
+  }),
+  
   
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useRegisterMutation, useLoginMutation,useLogoutMutation} = authApi
+export const { useRegisterMutation, useLoginMutation,useLogoutMutation,useContactMutation,useGetContactQuery} = authApi

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authApi } from './API/Auth'
 import AuthSlice from './Services/AuthSlice'
 import CartSlice from './Services/CartSlice'
 import { fakeAuthApi } from './API/FakeAuth'
+import { authApi } from './API/Auth'
 
 
 

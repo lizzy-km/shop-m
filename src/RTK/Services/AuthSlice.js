@@ -8,8 +8,8 @@ const AuthSlice = createSlice({
         },
     reducers: {
       AddUser:(state, {payload})=> {
-        state.user = [...state.user,payload]
-        Cookies.set('User', JSON.stringify(state))
+        (state.user = payload)
+
       },
     },
   })
