@@ -3,6 +3,7 @@
 import axios from "axios";
 import { AddUser } from "./RTK/Services/AuthSlice";
 import Cookies from "js-cookie";
+import { useRegisterMutation } from "./RTK/API/Auth";
 
 
 
@@ -108,5 +109,30 @@ const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,pa
       console.log(error);
   }
 }
+const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc,signup)=>{
 
-export { secondLargestNumber,isPalimdrome,fakeStoreLogin,LoginHandler }
+    try{
+      e.preventDefault();
+
+      const user = {
+        name,
+        email,
+        password,
+        password_confirmation
+      };
+
+      const {data} = await signup(user);
+      const {error} = await signup(user);
+
+      if (data?.success) {
+
+        setNewAcc(!newAcc)
+        
+      }
+
+    }catch (error){
+      console.log(error);
+    }
+}
+
+export { secondLargestNumber,isPalimdrome,fakeStoreLogin,LoginHandler,SignupHandler }

@@ -27,9 +27,12 @@ const NavBar = () => {
 
         </Flex>
         <Flex gap={'3'} >
-            <Box>
-            <MenuIcon Logout={Logout} data={data} />
-            </Box>  
+            {
+                token && <Box>
+                <MenuIcon Logout={Logout} data={data} />
+                </Box> 
+            }
+             
         <Box>
         <Button rounded={'full'} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
