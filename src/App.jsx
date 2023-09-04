@@ -29,7 +29,7 @@ const App = ()=> {
       <BrowserRouter>
       <Routes>
         {
-          isAuth !== null && <>
+          isAuth && <>
                         <Route exact path='/' element={<Home/>} />
                     </>
         }{

@@ -21,10 +21,8 @@ import { OAuthButtonGroup } from './LoginUtil/OAuthButtonGroup'
 import { useContactMutation, useGetContactQuery, useLoginMutation } from '../RTK/API/Auth'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddUser } from '../RTK/Services/AuthSlice'
-import { useFakeLoginMutation } from '../RTK/API/FakeAuth'
 import Cookies from 'js-cookie'
-import { fakeStoreLogin } from '../Function'
+import {  LoginHandler } from '../Function'
 
 const Login = ()=> {
     const[email,setEmail] = useState()
@@ -32,74 +30,24 @@ const Login = ()=> {
 
     const [login,{isLoading}] = useLoginMutation()
     const [fakeLogin] = useContactMutation()
-    const userData = useSelector(state => state.AuthSlice)
+    const userData = useSelector(state => state.AuthSlice.user)
 
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [fakeData,setFakeData] = useState()
-    const LoginHandler = async(e)=>{
-            try{
-
-                e.preventDefault();
-                const user ={
-                
-                 email,
-                 password,
-                
-                };
-
-                const {data} = await login(user);
-                const {error} = await login(user);
-                console.log(error);
-                console.log(user);
-
-
-                if (data?.success) {
-                  navigate('/')
-                  console.log(data);
-                  Cookies.set('User',data?.token)
-                  const name = data?.user?.name
-                  const pass = password
-                  const contact = {
-                    name:name,
-                    phone: '09761723325',
-                    email: email,
-                    address:email
-                  }
-                  const fData = await fakeLogin(contact)
-                 
-                  console.log(fData?.data?.contact);
-
-                  dispatch(AddUser(fData?.data?.contact))
-
-                  Cookies.set('ID',userData?.user?.id)
-                  
-                   
+    const isAuth = Cookies.get('User')
+   
 
 
 
-                }
-
-            }catch(error){
-                console.log(error);
-            }
-    }
-
-
-useEffect(()=>{
-  if (fakeData?.status ===200) {
-    const FData =JSON.parse(fakeData?.config?.data)
-    const finalData =JSON.parse(FData?.body)
-  console.log(fakeData)
-  dispatch(AddUser(finalData))
-  Cookies.set('UserData',JSON.stringify(FData))
-
-  }
-},[fakeData])
 
 console.log(userData);  
 
+if (userData?.id) {
+  Cookies.set('ID',userData?.id)
+
+  window.location.reload(true)
+ }
 
     
 
@@ -164,7 +112,7 @@ console.log(userData);
         }}
       >
         <Stack spacing="6">
-          <Stack onSubmit={LoginHandler} spacing="5">
+          <Stack  spacing="5">
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input value={email} onChange={(e)=> setEmail(e.target.value)} id="email" type="email" />
@@ -178,7 +126,7 @@ console.log(userData);
             </Button>
           </HStack>
           <Stack spacing="6">
-            <Button onClick={LoginHandler} >Sign in</Button>
+            <Button onClick={(e)=>LoginHandler(e,login,fakeLogin,userData,navigate,dispatch,email,password)} >Sign in</Button>
             <HStack>
               <Divider />
               <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">

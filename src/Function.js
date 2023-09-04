@@ -1,6 +1,8 @@
 // Check the word is Palimdrome?//
 
 import axios from "axios";
+import { AddUser } from "./RTK/Services/AuthSlice";
+import Cookies from "js-cookie";
 
 
 
@@ -62,4 +64,49 @@ const fakeStoreLogin = (email,name,pass,setFakeData)=>{
             // return data
 }
 
-export { secondLargestNumber,isPalimdrome,fakeStoreLogin }
+const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,password)=>{
+  
+  try{
+
+      e.preventDefault();
+      const user ={
+      
+       email,
+       password,
+      
+      };
+
+      const {data} = await login(user);
+      const {error} = await login(user);
+
+
+      if (data?.success) {
+        navigate('/')
+        Cookies.set('User',data?.token)
+        const name = data?.user?.name
+        const contact = {
+          name:name,
+          phone: '09761723325',
+          email: email,
+          address:email
+        }
+        const fData = await fakeLogin(contact)
+       
+        console.log(fData?.data?.contact);
+
+        dispatch(AddUser(fData?.data?.contact))
+
+        Cookies.set('ID',userData?.user?.id)
+        
+        
+
+
+
+      }
+
+  }catch(error){
+      console.log(error);
+  }
+}
+
+export { secondLargestNumber,isPalimdrome,fakeStoreLogin,LoginHandler }
