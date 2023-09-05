@@ -16,20 +16,24 @@ import Cookies from 'js-cookie'
 const Cart = () =>
  {
     const cartData = useSelector(state => state.CartSlice.cart)
-    const[total,setTotal]=useState()
+    
     const cart = useSelector(state => state.CartSlice.cart)
     let totalamount =0;
     if (cart?.length ===1) {
-      totalamount = cart?.map((data)=> data?.oneItemPrice  )
+      totalamount = cart?.map((data)=> totalamount=data?.oneItemPrice  )
 
     }if(cart?.length >1) {
-      totalamount = cart?.reduce((prev,curr)=> prev?.oneItemPrice + curr?.oneItemPrice  )
+     const sol = cart?.map(data => data.oneItemPrice)
+
+     totalamount =sol.reduce((accu,curr)=> { return accu+curr} )
+
+ 
 
     }if(cart?.length ===0) {
       Cookies.remove('Cart')
     }
     console.log(totalamount);
-    console.log(cartData);
+    console.log(cart);
 
     return  (
 
@@ -76,7 +80,7 @@ const Cart = () =>
   
           <Stack spacing="6">
             {cartData?.map((item) => (
-              <CartItem setTotal={setTotal} key={item?.id} {...item} item={item} />
+              <CartItem  key={item?.id} {...item} item={item} />
             ))}
           </Stack>
         </Stack>
@@ -85,7 +89,7 @@ const Cart = () =>
           <CartOrderSummary total={totalamount} />
           <HStack mt="6" fontWeight="semibold">
             <p>or</p>
-            <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
+            <Link href='/' color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
           </HStack>
         </Flex>
       </Stack>

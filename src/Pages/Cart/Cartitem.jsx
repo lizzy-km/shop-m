@@ -37,7 +37,7 @@ export const CartItem = (props) => {
     currency,
     price,
     onChangeQuantity,
-    setTotal,
+    
     item,
     oneItemPrice
     
@@ -55,7 +55,7 @@ export const CartItem = (props) => {
   const addQty =()=>{
     dispatch(AddToCart(item))
  }
- 
+
   const minusQty =()=>{
     dispatch(subtractCartQuantity(item))
  }
