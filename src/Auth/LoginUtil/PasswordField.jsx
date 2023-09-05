@@ -35,7 +35,7 @@ import {
               onClick={onClickReveal}
             />
           </InputRightElement>
-          <Input value={props.password} onChange={(e)=> props.setPass(e.target.value)}
+          <Input value={props.password} onChange={(e)=> props.setpassword(e.target.value)}
             id="password"
             ref={mergeRef}
             name="password"

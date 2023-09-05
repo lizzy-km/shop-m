@@ -6,9 +6,10 @@ import Cookies from "js-cookie";
 import { useContactMutation, useLoginMutation, useRegisterMutation } from "./RTK/API/Auth";
 import { useFakeLoginMutation } from "./RTK/API/FakeAuth";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Function =()=>{
+  const userData = useSelector(state => state.AuthSlice.user)
 
   const isPalimdrome =(word)=>{
     var letter = [];
@@ -68,7 +69,7 @@ const fakeStoreLogin = (email,name,pass,setFakeData)=>{
 }
 
 const [login] = useLoginMutation()
-const [fakeLogin] = useContactMutation()
+const [fakeLogin] = useFakeLoginMutation()
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
@@ -85,30 +86,11 @@ const LoginHandler = async(e,userData,email,password)=>{
       };
 
       const {data} = await login(user);
-      const {error} = await login(user);
-
+      const error = await login(user);
+      console.log(error);
       if (data?.success) {
-
-        // navigate('/')
         Cookies.set('User',data?.token)
-        const name = data?.user?.name
-        const contact = {
-          name:name,
-          phone: '09761723325',
-          email: email,
-          address:email
-        }
-        const fData = await fakeLogin(contact)
-       
-
-        dispatch(AddUser(fData?.data?.contact))
-
-        
-        
-
-
-
-      }
+       }
 
   }catch(error){
       console.log(error);
@@ -117,7 +99,8 @@ const LoginHandler = async(e,userData,email,password)=>{
 
 const [signup] = useRegisterMutation()
 
-const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc)=>{
+
+const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc,avatar,setErr)=>{
 
     try{
       e.preventDefault();
@@ -131,9 +114,30 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
 
       const {data} = await signup(user);
       const {error} = await signup(user);
-
+      console.log(error);
+      if (error) {
+        setErr(error?.data?.errors)
+        
+      }
       if (data?.success) {
 
+        const body = {
+          name,
+          email,
+          password,
+          avatar
+        }
+        const res = await fakeLogin(body)
+        console.log(res?.error?.data?.message);
+          if(res?.error?.data?.message){
+            setErr(res?.error?.data?.message)
+          }
+          console.log(res);
+          if (res?.data) {
+            dispatch(AddUser(res?.data))
+            
+            console.log(userData);
+          }
         setNewAcc(!newAcc)
         
       }

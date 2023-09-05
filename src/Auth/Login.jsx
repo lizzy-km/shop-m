@@ -1,4 +1,5 @@
 import {
+  Avatar,
     Box,
     Button,
     Checkbox,
@@ -32,17 +33,19 @@ const Login = ()=> {
     const[lname,setLname] = useState()
     const name = fname + lname
     const[email,setEmail] = useState()
-    const[password,setPass] = useState()
+    const[avatar,setAvatar] = useState('https://github.com/lizzy-km/image/blob/main/shopping-cat-with-cart-upscaled.png?raw=true')
+    const[password,setpassword] = useState()
     const[password_confirmation,setPassword_confirmation] = useState()
+    const[err,setErr] = useState()
 
-    
+    console.log(err);
     const userData = useSelector(state => state.AuthSlice.user)
 
     const {LoginHandler,SignupHandler} = Function()
     
     const isAuth = Cookies.get('User')
 
-   
+   console.log(userData);
 
 
 if (userData?.id) {
@@ -119,7 +122,7 @@ if (userData?.id) {
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <Input value={email} onChange={(e)=> setEmail(e.target.value)} id="email" type="email" />
                   </FormControl>
-                  <PasswordField password={password} setPass={setPass} />
+                  <PasswordField password={password} setpassword={setpassword} />
                 </Stack>
                 <HStack justify="space-between">
                   <Checkbox defaultChecked>Remember me</Checkbox>
@@ -185,8 +188,11 @@ if (userData?.id) {
                   </FormControl>
                   <FormControl id="password" isRequired>
                     <FormLabel>Password</FormLabel>
+                    {
+                      err?.password && <Text color={'red.500'} > {err?.password} </Text>
+                    }
                     <InputGroup>
-                      <Input value={password} onChange={(e)=> setPass(e.target.value)} type={showPassword ? 'text' : 'password'} />
+                      <Input value={password} onChange={(e)=> setpassword(e.target.value)} type={showPassword ? 'text' : 'password'} />
                       <InputRightElement h={'full'}>
                         <Button
                           variant={'ghost'}
@@ -195,6 +201,7 @@ if (userData?.id) {
                         </Button>
                       </InputRightElement>
                     </InputGroup>
+                    
                     
                   </FormControl>
                   <FormControl id="password" isRequired>
@@ -211,8 +218,29 @@ if (userData?.id) {
                     </InputGroup>
                     
                   </FormControl>
+                  <FormControl id="password" isRequired>
+                    <FormLabel>Profile image <Text color={'red.500'}  >(Paste your image Url)</Text> </FormLabel>
+                    <InputGroup>
+                      <Input   onChange={(e)=> setAvatar(e.target.value)} type= 'text' />
+                      <InputRightElement h={'full'}>
+                        <Avatar src={avatar} />
+                      </InputRightElement>
+                    </InputGroup>
+                    
+                    
+                  </FormControl>
+                  { err?.length >1 &&
+                    err?.map(data =>{
+                      return(
+                        <Text color={'red.500'} > {data} </Text>
+
+                      )
+                    })
+                  }{
+                    err?.length ===1 && <Text color={'red.500'} > {err} </Text>
+                  }
                   <Stack spacing={10} pt={2}>
-                    <Button onClick={(e)=>SignupHandler(e,name,email,password,password_confirmation,setNewAcc,newAcc)}
+                    <Button onClick={(e)=>SignupHandler(e,name,email,password,password_confirmation,setNewAcc,newAcc,avatar,setErr)}
                       loadingText="Submitting"
                       size="lg"
                       bg={'blue.400'}

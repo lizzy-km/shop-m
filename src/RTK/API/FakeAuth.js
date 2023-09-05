@@ -4,7 +4,7 @@ export const fakeAuthApi = createApi({
   
   reducerPath: 'fakeAuthApi',
   baseQuery: fetchBaseQuery({
-     baseUrl: 'https://fakestoreapi.com/auth/', 
+     baseUrl: 'https://api.escuelajs.co/api/v1', 
     }),
     
   tagTypes:["fakeAuth"],
@@ -13,19 +13,44 @@ export const fakeAuthApi = createApi({
 
     fakeLogin: builder.mutation({
         query:(user) =>({
-            url:'/login',
+            url:'/users/',
             method:'POST',
-            body:JSON.stringify({
-              username:`${user.username}`,
-              password:`${user.password}`
-            }),
+            body:user,
         }),
         invalidatesTags:["fakeAuth"]
     }),
+    getProducts: builder.query({
+      query:() =>({
+          url:`/products`,
+          method:'GET',
+          
+         
+      }),
+      providesTags:["fakeAuth"]
+  }),
+  getSingleProducts: builder.query({
+    query:(id) =>({
+        url:`/products/${id}`,
+        method:'GET',
+        
+       
+    }),
+    providesTags:["fakeAuth"]
+}),
+getSingleUser: builder.query({
+  query:(id) =>({
+      url:`/users/${id}`,
+      method:'GET',
+      
+     
+  }),
+  providesTags:["fakeAuth"]
+}),
+
 
     
   }),
   
 })
 
-export const { useFakeLoginMutation } = fakeAuthApi
+export const { useFakeLoginMutation,useGetProductsQuery,useGetSingleProductsQuery,useGetSingleUserQuery } = fakeAuthApi

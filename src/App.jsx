@@ -6,6 +6,7 @@ import Login from "./Auth/Login";
 import { Box, Flex } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import NavBar from "./Common/Header/NavBar";
+import Cart from "./Pages/Cart/Cart";
 
 const App = () => {
   const isAuth = Cookies.get("User");
@@ -20,6 +21,7 @@ const App = () => {
             {isAuth && (
               <>
                 <Route exact path="/" element={<Home />} />
+                <Route exact path="/cart" element={ <Cart/> } />
               </>
             )}
             {!isAuth && <Route exact path="/" element={<Login />} />}

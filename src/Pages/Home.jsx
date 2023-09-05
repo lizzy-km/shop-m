@@ -1,8 +1,11 @@
 import React from 'react'
+import App from '../Components/ProductCard/App'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <App/>
+    </div>
   )
 }
 
