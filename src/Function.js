@@ -3,12 +3,14 @@
 import axios from "axios";
 import { AddUser } from "./RTK/Services/AuthSlice";
 import Cookies from "js-cookie";
-import { useRegisterMutation } from "./RTK/API/Auth";
+import { useContactMutation, useLoginMutation, useRegisterMutation } from "./RTK/API/Auth";
+import { useFakeLoginMutation } from "./RTK/API/FakeAuth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+const Function =()=>{
 
-
-
-function isPalimdrome (word){
+  const isPalimdrome =(word)=>{
     var letter = [];
     var Rword ='';
     let Result;
@@ -65,7 +67,12 @@ const fakeStoreLogin = (email,name,pass,setFakeData)=>{
             // return data
 }
 
-const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,password)=>{
+const [login] = useLoginMutation()
+const [fakeLogin] = useContactMutation()
+const navigate = useNavigate()
+const dispatch = useDispatch()
+
+const LoginHandler = async(e,userData,email,password)=>{
   
   try{
 
@@ -80,9 +87,9 @@ const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,pa
       const {data} = await login(user);
       const {error} = await login(user);
 
-
       if (data?.success) {
-        navigate('/')
+
+        // navigate('/')
         Cookies.set('User',data?.token)
         const name = data?.user?.name
         const contact = {
@@ -93,11 +100,9 @@ const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,pa
         }
         const fData = await fakeLogin(contact)
        
-        console.log(fData?.data?.contact);
 
         dispatch(AddUser(fData?.data?.contact))
 
-        Cookies.set('ID',userData?.user?.id)
         
         
 
@@ -109,7 +114,10 @@ const LoginHandler = async(e,login,fakeLogin,userData,navigate,dispatch,email,pa
       console.log(error);
   }
 }
-const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc,signup)=>{
+
+const [signup] = useRegisterMutation()
+
+const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc)=>{
 
     try{
       e.preventDefault();
@@ -135,4 +143,18 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
     }
 }
 
-export { secondLargestNumber,isPalimdrome,fakeStoreLogin,LoginHandler,SignupHandler }
+  return (
+    { secondLargestNumber,
+      isPalimdrome,
+      fakeStoreLogin,
+      LoginHandler,
+      SignupHandler 
+    }
+  )
+}
+export default Function
+
+
+
+
+

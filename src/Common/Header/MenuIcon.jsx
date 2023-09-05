@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Avatar,  Button,    Menu,  MenuButton,  MenuDivider,  MenuItem,  MenuList,    } from '@chakra-ui/react'
 import { HiLogout, HiOutlineLockClosed, HiOutlineUserCircle } from 'react-icons/hi'
+import { useGetContactQuery } from '../../RTK/API/Auth'
+import Cookies from 'js-cookie'
 
+const MenuIcon = useCallback(({Logout}) => {
 
-const MenuIcon = ({data,Logout}) => {
-  return (
+    const id = Cookies.get('ID')
+
+    const {data} = useGetContactQuery(id)
+    
+
+return (
     <Menu>
               <MenuButton
                 as={Button}
@@ -14,9 +21,7 @@ const MenuIcon = ({data,Logout}) => {
                 minW={0}>
                 <Avatar
                   size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
+                 
                 />
               </MenuButton>
               <MenuList>
@@ -27,6 +32,8 @@ const MenuIcon = ({data,Logout}) => {
               </MenuList>
             </Menu>
   )
-}
+},[])
+
+
 
 export default MenuIcon

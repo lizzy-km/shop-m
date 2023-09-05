@@ -18,15 +18,13 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react'
   
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Logo } from './LoginUtil/Logo'
 import { PasswordField } from './LoginUtil/PasswordField'
 import { OAuthButtonGroup } from './LoginUtil/OAuthButtonGroup'
-import { useContactMutation, useGetContactQuery, useLoginMutation, useRegisterMutation } from '../RTK/API/Auth'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
-import {  LoginHandler, SignupHandler } from '../Function'
+import Function from '../Function'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 const Login = ()=> {
@@ -37,21 +35,15 @@ const Login = ()=> {
     const[password,setPass] = useState()
     const[password_confirmation,setPassword_confirmation] = useState()
 
-    const [login,{isLoading}] = useLoginMutation()
-    const [signup] = useRegisterMutation()
-    const [fakeLogin] = useContactMutation()
+    
     const userData = useSelector(state => state.AuthSlice.user)
 
+    const {LoginHandler,SignupHandler} = Function()
     
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
     const isAuth = Cookies.get('User')
+
    
 
-
-
-
-console.log(userData);  
 
 if (userData?.id) {
   Cookies.set('ID',userData?.id)
@@ -95,7 +87,7 @@ if (userData?.id) {
                   Log in to your account
                 </Heading>
                 <Text color="fg.muted">
-                  Don't have an account? <Link onClick={()=> setNewAcc(!newAcc)} href="#">Sign up</Link>
+                  Don't have an account? <Link onClick={()=> setNewAcc(!newAcc)} >Sign up</Link>
                 </Text>
               </Stack>
             </Stack>
@@ -136,7 +128,7 @@ if (userData?.id) {
                   </Button>
                 </HStack>
                 <Stack spacing="6">
-                  <Button onClick={(e)=>LoginHandler(e,login,fakeLogin,userData,navigate,dispatch,email,password)} >Sign in</Button>
+                  <Button onClick={(e)=>LoginHandler(e,userData,email,password)} >Sign in</Button>
                   <HStack>
                     <Divider />
                     <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
@@ -220,7 +212,7 @@ if (userData?.id) {
                     
                   </FormControl>
                   <Stack spacing={10} pt={2}>
-                    <Button onClick={(e)=>SignupHandler(e,name,email,password,password_confirmation,setNewAcc,newAcc,signup)}
+                    <Button onClick={(e)=>SignupHandler(e,name,email,password,password_confirmation,setNewAcc,newAcc)}
                       loadingText="Submitting"
                       size="lg"
                       bg={'blue.400'}
