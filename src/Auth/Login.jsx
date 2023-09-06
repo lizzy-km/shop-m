@@ -58,7 +58,7 @@ if (userData?.id) {
 
       if (newAcc === true) {
         return (
-          <Container
+          <Container  mt={'6'}
           maxW="lg"
           py={{
             base: '12',
@@ -146,7 +146,7 @@ if (userData?.id) {
         )
       }else{
         return (
-          <Flex
+          <Flex mt={'6'}
             minH={'100vh'}
             align={'center'}
             justify={'center'}

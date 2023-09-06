@@ -8,14 +8,20 @@ import {
     useColorModeValue as mode,
   } from '@chakra-ui/react'
   import { CartOrderSummary } from './CartOrderSummary'
-import { useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { CartItem } from './Cartitem'
-import { useState } from 'react'
 import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
   
 const Cart = () =>
  {
     const cartData = useSelector(state => state.CartSlice.cart)
+    const navigate = useNavigate()
+    const token = Cookies.get("User");
+    if (!token) {
+      window.location.replace('/')
+    }
+
     
     const cart = useSelector(state => state.CartSlice.cart)
     let totalamount =0;
@@ -32,12 +38,11 @@ const Cart = () =>
     }if(cart?.length ===0) {
       Cookies.remove('Cart')
     }
-    console.log(totalamount);
-    console.log(cart);
 
     return  (
 
     <Box
+    mt={'8'}
       maxW={{
         base: '3xl',
         lg: '7xl',

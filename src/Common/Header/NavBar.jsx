@@ -20,10 +20,15 @@ const NavBar = () => {
   const [signout] = useLogoutMutation();
   const cart = useSelector(state => state.CartSlice.cart)
   console.log(cart);
+  const cookieNames = Object.keys(Cookies.get());
   const Logout = async () => {
     const bye = signout(token);
     console.log(bye);
     Cookies.remove("User");
+    cookieNames?.map(cookie =>{
+      Cookies.remove(cookie);
+
+    })
     window.location.reload(true);
   };
 

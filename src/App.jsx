@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import React from "react";
 import Home from "./Pages/Home";
@@ -11,6 +11,7 @@ import Cart from "./Pages/Cart/Cart";
 const App = () => {
   const isAuth = Cookies.get("User");
 
+ 
   return (
     <Flex w={"100%"}  overflow={'hidden'} flexDirection={"column"}>
       <NavBar  />
