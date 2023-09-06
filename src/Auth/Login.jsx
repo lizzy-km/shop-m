@@ -38,14 +38,12 @@ const Login = ()=> {
     const[password_confirmation,setPassword_confirmation] = useState()
     const[err,setErr] = useState()
 
-    console.log(err);
     const userData = useSelector(state => state.AuthSlice.user)
 
     const {LoginHandler,SignupHandler} = Function()
     
     const isAuth = Cookies.get('User')
 
-   console.log(userData);
 
 
 if (userData?.id) {
@@ -58,7 +56,7 @@ if (userData?.id) {
 
       const[newAcc,setNewAcc] = useState(false)
 
-      if (newAcc === false) {
+      if (newAcc === true) {
         return (
           <Container
           maxW="lg"
@@ -131,7 +129,7 @@ if (userData?.id) {
                   </Button>
                 </HStack>
                 <Stack spacing="6">
-                  <Button onClick={(e)=>LoginHandler(e,userData,email,password)} >Sign in</Button>
+                  <Button onClick={(e)=>LoginHandler(e,userData,email,password,name,avatar)} >Sign in</Button>
                   <HStack>
                     <Divider />
                     <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
@@ -251,11 +249,11 @@ if (userData?.id) {
                       Sign up
                     </Button>
                   </Stack>
-                  <Stack pt={6}>
+                  {/* <Stack pt={6}>
                     <Text align={'center'}>
                       Already a user? <Link onClick={()=> setNewAcc(!newAcc)} color={'blue.400'}>Login</Link>
                     </Text>
-                  </Stack>
+                  </Stack> */}
                 </Stack>
               </Box>
             </Stack>

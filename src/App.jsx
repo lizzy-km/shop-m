@@ -12,8 +12,8 @@ const App = () => {
   const isAuth = Cookies.get("User");
 
   return (
-    <Flex w={"100%"} justify={"flex-start"} flexDirection={"column"}>
-      <NavBar />
+    <Flex w={"100%"}  overflow={'hidden'} flexDirection={"column"}>
+      <NavBar  />
 
       <Box>
         <BrowserRouter>

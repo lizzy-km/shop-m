@@ -112,7 +112,7 @@ const [fakeLogin] = useFakeLoginMutation()
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
-const LoginHandler = async(e,userData,email,password)=>{
+const LoginHandler = async(e,userData,email,password,name,avatar)=>{
   
   try{
 
@@ -126,13 +126,31 @@ const LoginHandler = async(e,userData,email,password)=>{
 
       const {data} = await login(user);
       const error = await login(user);
-      console.log(error);
-      if (data?.success) {
+     
+       if (data?.success) {
         Cookies.set('User',data?.token)
-       }
+
+        const body = {
+          name,
+          email,
+          password,
+          avatar
+        }
+        const res = await fakeLogin(body)
+        console.log(res?.error?.data?.message);
+          if(res?.error?.data?.message){
+            setErr(res?.error?.data?.message)
+          }
+          if (res?.data) {
+            dispatch(AddUser(res?.data))
+            
+          }
+        setNewAcc(!newAcc)
+        
+      }
+
 
   }catch(error){
-      console.log(error);
   }
 }
 
@@ -182,9 +200,10 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
       }
 
     }catch (error){
-      console.log(error);
     }
 }
+
+
 
   return (
     { secondLargestNumber,

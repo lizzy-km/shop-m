@@ -30,7 +30,6 @@ import { FaCartPlus } from 'react-icons/fa'
     const cart = useSelector(state => state.CartSlice.cart)
     const isCart = cart?.find(data => data?.id === id)
     const Cart = cart?.filter(data => data.id ===id)
-    console.log(Cart);
     const isProduct = product?.length > 0
 
     let PCprice;

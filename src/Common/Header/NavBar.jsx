@@ -10,6 +10,11 @@ import { useSelector } from "react-redux";
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
+  window.addEventListener("scroll",function(){
+    const search = document.querySelector('.cart')
+    search.classList.toggle('active', this.window.scrollY > 100)
+});
+
   const token = Cookies.get("User");
 
   const [signout] = useLogoutMutation();
@@ -23,10 +28,12 @@ const NavBar = () => {
   };
 
   return (
-    <Flex
+    <Flex 
+      position={'fixed'}
+      zIndex={'99'}
       w={"100%"}
       h={"60px"}
-      bg={"blackAlpha.900"}
+      bg={"gray.500"}
       justify={"space-between"}
       alignItems={"center"}
       padding={"3"}
@@ -71,7 +78,7 @@ const NavBar = () => {
 
       <Flex alignItems={'center'} justify={'center'} gap={"3"}>
         {token && (
-          <Flex justifyContent={'center'} alignItems={'center'} gap={'3'} >
+          <Flex className="cart" justifyContent={'center'} alignItems={'center'} gap={'3'} >
             
             <MenuIcon   Logout={Logout} />
 

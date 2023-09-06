@@ -1,16 +1,23 @@
 import axios from "axios"
 import { useGetProductsQuery } from "../../RTK/API/FakeAuth"
+import { useCallback, useEffect, useState } from "react"
+import Cookies from "js-cookie"
+import Category from "../Categories/Category"
 
 const data = ()=> {
 
     const {data,isLoading} =  useGetProductsQuery()
 
     const products = data
+    const[count,setCount] = useState(20)
+    const [name,setName] = useState('')
 
-    
+    let Realproducts;
+    let RealProducts;
 
+    const catName = Cookies.get('CatName')
 
-
+ 
 
     const ImgData = async(id,title)=>{
 
@@ -33,12 +40,48 @@ const data = ()=> {
             });
       
     }
+    const filterProducts = ()=> {
+       
+        if (name === '') {
+            Realproducts = data?.filter(item =>  item?.id <count)
+
+        }
+           
+        
+        return {
+            Realproducts
+        }
+
+    }
+    const filterProductsCat = ()=> {
+       
+       
+        RealProducts = data?.filter(item =>  item?.category?.name === catName)
+
+        
+        
+        return {
+            RealProducts
+        }
+
+    }
+
+   
 
     return(
         {
             products,
             ImgData,
-            isLoading
+            isLoading,
+            filterProducts,
+            setCount,
+            count,
+            setName,
+            name,
+            catName,
+            filterProductsCat,
+           
+            
         }
     )
 }

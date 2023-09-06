@@ -2,21 +2,28 @@ import { AspectRatio, Badge, Box, Button, Skeleton, Stack, Text, useColorModeVal
 import { ProductCard } from './ProductCard'
 import { ProductGrid } from './ProductGrid'
 import data from './data'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
 import { FaArrowAltCircleRight, FaArrowRight } from 'react-icons/fa'
 import { HiOutlineArrowCircleRight, HiOutlineArrowRight } from 'react-icons/hi'
 import Function from '../../Function'
+import Cookies from 'js-cookie'
 
- const App = () =>{
-    const {products,isLoading} = data()
-    const[count,setCount] = useState(20)
-    const Realproducts = products?.filter((data) => data?.id < count )
-
-    console.log(Realproducts)
-
+ const App = ({load}) =>{
+    const {products,isLoading,filterProducts,setCount,count,name,filterProductsCat} = data()
     const {arr} = Function()
 
+    const {Realproducts}  =filterProducts()
+
+    let {RealProducts} = filterProductsCat()
+    let catName = Cookies.get('CatName')
+    useEffect(()=>{
+      filterProductsCat()
+      catName = Cookies.get('CatName')
+    },[load])
+
+    console.log(RealProducts);
+    
 
     return (
   <Box
@@ -27,11 +34,7 @@ import Function from '../../Function'
       md: '8',
       lg: '12',
     }}
-    py={{
-      base: '6',
-      md: '8',
-      lg: '12',
-    }}
+    py={0}
   >
     <ProductGrid  >
       {
@@ -57,6 +60,7 @@ import Function from '../../Function'
           lg:'200px',
           xl:'210px'
         }}
+        rounded={'lg'}
         >
         <AspectRatio 
         ratio={4 / 3}>
@@ -98,7 +102,7 @@ import Function from '../../Function'
           </Skeleton>
         </Stack>
 
-        <Stack bg={'blue.200'}
+        <Stack bg={'blackAlpha.200'}
          borderBottomRadius={{
             base: 'md',
             md: 'xl',
@@ -110,7 +114,7 @@ import Function from '../../Function'
           alignItems={'center'} 
           justifyItems={'center'} 
           rounded={'none'}  
-          bg={'blue.200'} 
+          bg={'blackAlpha.200'} 
           width="full">
             
                 
@@ -138,6 +142,7 @@ import Function from '../../Function'
           </Stack>
           <Skeleton 
           paddingX={'2'}
+          w={'100px'}
           bg={useColorModeValue('gray.500', 'blackAlpha.800')}
            borderTopRadius={{
             base: 'sm',
@@ -156,17 +161,33 @@ import Function from '../../Function'
 
         
       }
-      { !isLoading &&
-      Realproducts?.map((product) => (
-        <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
-      ))
+      { !isLoading && catName === '' &&
+        Realproducts?.map((product) => (
+          <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
+        ))
       }
+      { !isLoading && RealProducts?.length ===0 &&
+
+        Realproducts?.map((product) => (
+           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
+      ))
+
+}
+      { !isLoading && RealProducts?.length >0 &&
+
+        RealProducts?.map((product) => (
+          <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
+        ))
+      
+      }
+      
       {
-        !isLoading && <Button onClick={()=> setCount(count+20)} bg={'transparent'} alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
+        !isLoading && catName === '' && <Button onClick={()=> setCount(count+20)} bg={'transparent'} alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
 
       }
     </ProductGrid>
 
   </Box>
-)}
+)
+}
 export default App
