@@ -11,6 +11,45 @@ import { useDispatch, useSelector } from "react-redux";
 const Function =()=>{
   const userData = useSelector(state => state.AuthSlice.user)
 
+  const arr = [
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },{
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+    {
+      id:'1'
+    },
+  ]
+  
+
   const isPalimdrome =(word)=>{
     var letter = [];
     var Rword ='';
@@ -152,7 +191,8 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
       isPalimdrome,
       fakeStoreLogin,
       LoginHandler,
-      SignupHandler 
+      SignupHandler,
+      arr 
     }
   )
 }

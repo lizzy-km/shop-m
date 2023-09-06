@@ -10,10 +10,10 @@ export const Rating = (props) => {
       {Array.from({
         length: max,
       })
-        .map((_, index) => index + 1)
+        .map((_, index) => index * 25)
         .map((index) => (
           <Icon
-            key={index}
+            key={index/100}
             as={FaStar}
             fontSize={size}
             color={index <= defaultValue ? activeColor : color}

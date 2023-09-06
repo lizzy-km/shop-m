@@ -26,7 +26,7 @@ const NavBar = () => {
     <Flex
       w={"100%"}
       h={"60px"}
-      bg={"blackAlpha.800"}
+      bg={"blackAlpha.900"}
       justify={"space-between"}
       alignItems={"center"}
       padding={"3"}

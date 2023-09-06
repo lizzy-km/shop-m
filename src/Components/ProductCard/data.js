@@ -3,9 +3,10 @@ import { useGetProductsQuery } from "../../RTK/API/FakeAuth"
 
 const data = ()=> {
 
-    const getProducts =  useGetProductsQuery()
+    const {data,isLoading} =  useGetProductsQuery()
 
-    const products = getProducts?.data
+    const products = data
+
     
 
 
@@ -36,7 +37,8 @@ const data = ()=> {
     return(
         {
             products,
-            ImgData
+            ImgData,
+            isLoading
         }
     )
 }
