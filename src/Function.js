@@ -178,23 +178,7 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
       }
       if (data?.success) {
 
-        const body = {
-          name,
-          email,
-          password,
-          avatar
-        }
-        const res = await fakeLogin(body)
-        console.log(res?.error?.data?.message);
-          if(res?.error?.data?.message){
-            setErr(res?.error?.data?.message)
-          }
-          console.log(res);
-          if (res?.data) {
-            dispatch(AddUser(res?.data))
-            
-            console.log(userData);
-          }
+       LoginHandler(e,userData,email,password,name,avatar)
         setNewAcc(!newAcc)
         
       }

@@ -166,6 +166,11 @@ import Cookies from 'js-cookie'
           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
         ))
       }
+      { !isLoading && catName === 'All' &&
+        Realproducts?.map((product) => (
+          <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
+        ))
+      }
       { !isLoading && RealProducts?.length ===0 &&
 
         Realproducts?.map((product) => (

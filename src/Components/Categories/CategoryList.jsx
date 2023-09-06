@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useGetCategoriesQuery } from '../../RTK/API/FakeAuth';
-import { Box, Button, ButtonGroup, Flex, Image,  Text,  useColorModeValue, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, Image,  Tab,  TabList,  Tabs,  Text,  useColorModeValue, useMediaQuery } from '@chakra-ui/react';
 import data from '../ProductCard/data';
 import Cookies from 'js-cookie';
 
@@ -19,11 +19,13 @@ const CategoryList = ({load,setLoad}) => {
 
     // console.log(name);
 
-   
+   const active =(e)=>{
+    e.target.bg ='blue.200'
+   }
   return (
     <>{
         isLargerThan840 ? (
-            <Flex 
+            <Tabs  colorScheme='blue'
             roundedBottom={{
                 base:'base',
                 md:'md',
@@ -38,17 +40,44 @@ const CategoryList = ({load,setLoad}) => {
             gap={'4'}
     
              >
-                <Flex 
+                <TabList 
                 px={'8'}
                 py={'4'}
     
                 flexDirection={'column'}
                 gap={'4'}
                  >
-                {
+                        <Tab _hover={{
+                            bg:'blackAlpha.400'
+                        }} 
+                        rounded={{
+                            base:'base',
+                            md:'md',
+                            lg:'lg',
+                            xl:'xl'
+                        }} 
+                        id={''} onClick={()=> setName('')}
+                            key={''}
+                            display={'flex'}
+                            justifyContent={'space-between'}
+                            maxW={'100%'}
+                            minW={'100%'}
+                             > 
+                            <Text> All </Text>
+                            
+                            </Tab>                      {
                     Cat?.map(data => {
                         return(
-                            <Button id={data?.name} onClick={()=> setName(data?.name)}
+                            <Tab    _hover={{
+                                bg:'blackAlpha.400'
+                            }}
+                            rounded={{
+                                base:'base',
+                                md:'md',
+                                lg:'lg',
+                                xl:'xl'
+                            }}    
+                            id={data?.name} onClick={()=> setName(data?.name)}
                             key={data?.id}
                             display={'flex'}
                             justifyContent={'space-between'}
@@ -62,14 +91,14 @@ const CategoryList = ({load,setLoad}) => {
      
                             rounded={'md'}
                             src={data?.image} />
-                            </Button>
+                            </Tab>
     
                         )
                     })
                 }
-                </Flex>
+                </TabList>
                
-            </Flex>
+            </Tabs>
         ):(
             <Flex 
             bg={useColorModeValue('gray.400', 'blackAlpha.800')}            alignItems={'center'}
