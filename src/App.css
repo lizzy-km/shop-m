@@ -3,3 +3,6 @@
 *{
   font-family: 'Raleway', sans-serif !important;
 }
+.maxH{
+  max-height: 100vh;
+}

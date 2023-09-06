@@ -27,6 +27,8 @@ import Cookies from 'js-cookie'
 
     return (
   <Box
+    className='maxH'
+    overflowY={'scroll'}
     maxW="7xl"
     mx="auto"
     px={{

@@ -100,7 +100,9 @@ const CategoryList = ({load,setLoad}) => {
                
             </Tabs>
         ):(
-            <Flex 
+            <Tabs colorScheme='blue'
+            display={'flex'}
+
             bg={useColorModeValue('gray.400', 'blackAlpha.800')}            alignItems={'center'}
             rounded={{
                 base:'base',
@@ -116,17 +118,31 @@ const CategoryList = ({load,setLoad}) => {
             p={'3'}
     
              >
-                <Flex 
+                <TabList 
                 // px={'8'}
                 py={'4'}
-    
+                display={'flex'}
                 flexDirection={'row'}
                 gap={'4'}
                  >
+                    <Tab _hover={{
+                            bg:'blackAlpha.400'
+                        }} 
+                       
+                        id={''} onClick={()=> setName('')}
+                            key={''}
+                            display={'flex'}
+                            justifyContent={'space-between'}
+                            maxW={'15%'}
+                            minW={'15%'}
+                             > 
+                            <Text> All </Text>
+                            
+                            </Tab>
                 {
                     Cat?.map(data => {
                         return(
-                            <Button id={data?.name} onClick={()=> setName(data?.name)}
+                            <Tab id={data?.name} onClick={()=> setName(data?.name)}
                             display={'flex'}
                             justifyContent={'space-between'}
                             maxW={'15%'}
@@ -139,14 +155,14 @@ const CategoryList = ({load,setLoad}) => {
      
                             rounded={'md'}
                             src={data?.image} />
-                            </Button>
+                            </Tab>
     
                         )
                     })
                 }
-                </Flex>
+                </TabList>
                
-            </Flex>
+            </Tabs>
         )
     }</>
   )
