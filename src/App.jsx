@@ -31,7 +31,7 @@ const App = () => {
                 <Route exact path="/cart" element={ <Cart/> } />
               </>
             )}
-            {!is && <Route exact path="/" element={<Login />} />}
+            {!is && <Route exact path="/*" element={<Login />} />}
           </Routes>
         </BrowserRouter>
       </Box>
