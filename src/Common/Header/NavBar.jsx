@@ -6,6 +6,7 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import MenuIcon from "./MenuIcon";
 import { HiShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
+import { useGetSingleUserQuery } from "../../RTK/API/FakeAuth";
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -16,6 +17,9 @@ const NavBar = () => {
 });
 
   const token = Cookies.get("User");
+
+  
+  
 
   const [signout] = useLogoutMutation();
   const cart = useSelector(state => state.CartSlice.cart)

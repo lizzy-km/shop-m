@@ -4,7 +4,7 @@ import axios from "axios";
 import { AddUser } from "./RTK/Services/AuthSlice";
 import Cookies from "js-cookie";
 import { useContactMutation, useLoginMutation, useRegisterMutation } from "./RTK/API/Auth";
-import { useFakeLoginMutation } from "./RTK/API/FakeAuth";
+import { useFakeLoginMutation, useGetSingleUserQuery } from "./RTK/API/FakeAuth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -111,7 +111,7 @@ const [login] = useLoginMutation()
 const [fakeLogin] = useFakeLoginMutation()
 const navigate = useNavigate()
 const dispatch = useDispatch()
-
+const [createContact] = useContactMutation()
 const LoginHandler = async(e,userData,email,password,name,avatar)=>{
   
   try{
@@ -126,25 +126,29 @@ const LoginHandler = async(e,userData,email,password,name,avatar)=>{
 
       const {data} = await login(user);
       const error = await login(user);
-     
+     console.log(data);
        if (data?.success) {
-        Cookies.set('User',data?.token)
+       const phone= Cookies.get('LID')
 
-        const body = {
-          name,
+        const contact = {
+          name:data?.user?.name,
+          phone,
           email,
-          password,
-          avatar
+          address:'shop'
         }
-        const res = await fakeLogin(body)
-        console.log(res?.error?.data?.message);
-          if(res?.error?.data?.message){
-            setErr(res?.error?.data?.message)
-          }
-          if (res?.data) {
-            dispatch(AddUser(res?.data))
-            
-          }
+        const newContact = await createContact(contact)
+        console.log(newContact);
+
+        if (newContact?.data?.success) {
+          Cookies.set('User',data?.token)
+          Cookies.set('LID',newContact?.data?.contact?.phone)
+
+          window.location.reload(true)
+
+        }
+
+
+        
         setNewAcc(!newAcc)
         
       }
@@ -153,6 +157,8 @@ const LoginHandler = async(e,userData,email,password,name,avatar)=>{
   }catch(error){
   }
 }
+
+
 
 const [signup] = useRegisterMutation()
 
@@ -177,9 +183,23 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
         
       }
       if (data?.success) {
-
-       LoginHandler(e,userData,email,password,name,avatar)
-        setNewAcc(!newAcc)
+        const body = {
+          name,
+          email,
+          password,
+          avatar
+        }
+        const res = await fakeLogin(body)
+        console.log(res?.error?.data?.message);
+          if(res?.error?.data?.message){
+            setErr(res?.error?.data?.message)
+          }
+          if (res?.data) {
+            console.log(res?.data);
+            Cookies.set('LID',res?.data?.id)
+            setNewAcc(!newAcc)
+            
+          }
         
       }
 

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 const MenuIcon = ({Logout}) => {
 
-    const id = Cookies.get('ID')
+    const id = Cookies.get('LID')
 
     const {data} = useGetSingleUserQuery(id)
     

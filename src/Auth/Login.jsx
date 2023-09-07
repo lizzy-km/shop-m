@@ -56,7 +56,7 @@ if (userData?.id) {
 
       const[newAcc,setNewAcc] = useState(false)
 
-      if (newAcc === true) {
+      if (newAcc === false) {
         return (
           <Container  mt={'6'}
           maxW="lg"
@@ -249,11 +249,11 @@ if (userData?.id) {
                       Sign up
                     </Button>
                   </Stack>
-                  {/* <Stack pt={6}>
+                  <Stack pt={6}>
                     <Text align={'center'}>
                       Already a user? <Link onClick={()=> setNewAcc(!newAcc)} color={'blue.400'}>Login</Link>
                     </Text>
-                  </Stack> */}
+                  </Stack>
                 </Stack>
               </Box>
             </Stack>

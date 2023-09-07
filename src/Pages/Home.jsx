@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import App from "../Components/ProductCard/App";
 import { Flex, useMediaQuery } from "@chakra-ui/react";
 import Category from "../Components/Categories/Category";
-import Top from "../Common/Header/Top";
+import Fav from "../Components/Fav/Fav";
 
 const Home = () => {
   const [isLargerThan840] = useMediaQuery('(min-width: 840px)')
@@ -16,21 +16,20 @@ const Home = () => {
     h={'screen'} 
     maxH={'screen'} 
     flexDirection={'column'}
-    px={'5'}
+    p={'5'}
      >
       
       <Flex 
       rounded={'xl'}
-      bg={'gray.400'} 
-      
-      h={'100px'} >
-        {/* <Top/> */}
+      shadow={'0px 0px 8px #121212'}
+      h={'auto'} >
+        <Fav/>
       </Flex>
 
       {
         isLargerThan840 ? (
           <Flex 
-          py={'4'}
+          py={'6'}
           
            >
             <Flex w={"20%"}>

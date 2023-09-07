@@ -75,7 +75,10 @@ import { FaCartPlus } from 'react-icons/fa'
                         src={images[2]}
                         alt={title}
                         draggable="false"
-                        fallback={<Skeleton />}
+                        fallback={<Skeleton borderTopRadius={{
+                          base: 'md',
+                          md: 'xl',
+                        }} />}
                         borderTopRadius={{
                           base: 'md',
                           md: 'xl',

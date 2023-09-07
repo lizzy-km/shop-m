@@ -36,7 +36,11 @@ import Cookies from 'js-cookie'
       md: '8',
       lg: '12',
     }}
-    py={0}
+    py={{
+      base: '1',
+      md: '1',
+      lg: '1',
+    }}
   >
     <ProductGrid  >
       {
