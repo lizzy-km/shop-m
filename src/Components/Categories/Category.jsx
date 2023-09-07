@@ -30,7 +30,7 @@ const Category = ({load,setLoad}) => {
              <Box 
             p={'4'}
             w={'100%'}
-            shadow={'0px -3px 8px #121212'}
+            // shadow={'0px -3px 8px #121212'}
     
             roundedTop={{
                 base:'base',

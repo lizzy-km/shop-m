@@ -173,7 +173,7 @@ const CategoryList = ({load,setLoad}) => {
                              > 
                             <Text> {data?.name} </Text>
                             <Image 
-                            w={'50%'}
+                            w={'80%'}
                             // h={'30px'} 
      
                             rounded={'md'}

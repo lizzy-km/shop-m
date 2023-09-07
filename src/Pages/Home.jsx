@@ -21,7 +21,7 @@ const Home = () => {
       
       <Flex 
       rounded={'xl'}
-      shadow={'0px 0px 8px #121212'}
+      shadow={'0px 0px 4px #121212'}
       h={'auto'} >
         <Fav/>
       </Flex>
