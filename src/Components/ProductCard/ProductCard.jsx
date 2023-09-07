@@ -187,7 +187,10 @@ import { FaCartPlus } from 'react-icons/fa'
            h={'40px'} 
            alignItems={'center'} 
            justifyItems={'center'} 
-           rounded={'none'}  
+           borderBottomRadius={{
+            base: 'md',
+            md: 'xl',
+          }}  
            bg={'blue.200'} 
            width="full">
              {
@@ -231,18 +234,7 @@ import { FaCartPlus } from 'react-icons/fa'
              }
              
            </Flex>
-           <Link 
-           paddingX={'2'}
-           bg={useColorModeValue('gray.500', 'blackAlpha.800')}
-            borderTopRadius={{
-             base: 'sm',
-             md: 'md',
-           }}
-             fontWeight="medium"
-             color={useColorModeValue('white', 'white')}
-           >
-             Quick shop
-           </Link>
+          
          </Stack>
         }
         

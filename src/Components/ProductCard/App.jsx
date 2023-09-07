@@ -20,12 +20,13 @@ import Cookies from 'js-cookie'
       catName = Cookies.get('CatName')
     },[load])
 
-    
+    const products = Realproducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
+    const fProducts = RealProducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
 
     return (
   <Box
-    className='maxH'
-    overflowY={'scroll'}
+    // className='maxH'
+    // overflowY={'scroll'}
     maxW="7xl"
     mx="auto"
     px={{
@@ -165,25 +166,25 @@ import Cookies from 'js-cookie'
         
       }
       { !isLoading && catName === '' &&
-        Realproducts?.map((product) => (
+        products?.map((product) => (
           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
         ))
       }
       { !isLoading && catName === 'All' &&
-        Realproducts?.map((product) => (
+        products?.map((product) => (
           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
         ))
       }
       { !isLoading && RealProducts?.length ===0 &&
 
-        Realproducts?.map((product) => (
+products?.map((product) => (
            <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
       ))
 
 }
       { !isLoading && RealProducts?.length >0 &&
 
-        RealProducts?.map((product) => (
+        fProducts?.map((product) => (
           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
         ))
       

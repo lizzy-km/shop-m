@@ -7,11 +7,12 @@ import Cookies from 'js-cookie';
 
 const CategoryList = ({load,setLoad}) => {
     const CatD = useGetCategoriesQuery()
-    const Cat = CatD?.data?.filter(item => item?.image !== 'https://placeimg.com/640/480/any')
+    const Cat = CatD?.data?.filter(item => item?.image !== 'https://placeimg.com/640/480/any').filter(item => item?.name !== '  ').filter(item => item?.name !== 'Animals').filter(item => item?.name !== 'Animals')
+   
     const [isLargerThan840] = useMediaQuery('(min-width: 840px)')
     const { setName,name } = data()
    
-
+    // console.log(Cat);
     useEffect(()=>{
         Cookies.set('CatName',name)
         setLoad(!load)
@@ -101,6 +102,8 @@ const CategoryList = ({load,setLoad}) => {
             // </Tabs>
             <Tabs colorScheme='blue'
             display={'flex'}
+            justifyContent={'center'}
+            w={'100%'}
 
             bg={useColorModeValue('gray.400', 'blackAlpha.800')}            alignItems={'center'}
             roundedBottom={{
@@ -123,6 +126,9 @@ const CategoryList = ({load,setLoad}) => {
                 flexDirection={'row'}
                 flexWrap={'wrap'}
                 gap={'4'}
+                
+            justifyContent={'space-between'}
+            w={'100%'}
                  >
                     <Tab _hover={{
                             bg:'blackAlpha.400'
