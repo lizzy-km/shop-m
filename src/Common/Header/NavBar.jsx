@@ -49,11 +49,11 @@ const NavBar = () => {
         name: "Phone Cables & Converters ",
         image: "https://i.pinimg.com/564x/6d/ad/1c/6dad1c7413c6dbba293b4ee4c35bdd12.jpg"
       }
-      const cate = await addCategory(category)
-      console.log(cate);
+      // const cate = await addCategory(category)
+      // console.log(cate);
 
-      // const data = await addProducts(products)
-      // console.log(data);
+      const data = await addProducts(products)
+      console.log(data);
 
     }catch(error){
 
