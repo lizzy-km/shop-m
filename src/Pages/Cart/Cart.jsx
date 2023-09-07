@@ -12,16 +12,19 @@ import {  useSelector } from 'react-redux'
 import { CartItem } from './Cartitem'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
+import { useGetSingleUserQuery } from '../../RTK/API/FakeAuth'
+import Function from '../../Function'
   
 const Cart = () =>
  {
     const cartData = useSelector(state => state.CartSlice.cart)
-    const navigate = useNavigate()
-    const token = Cookies.get("User");
-    if (!token) {
+    
+    const {isAuth} = Function()
+    const {is} = isAuth()
+
+    if (!is) {
       window.location.replace('/')
     }
-
     
     const cart = useSelector(state => state.CartSlice.cart)
     let totalamount =0;

@@ -27,6 +27,7 @@ import {  useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import Function from '../Function'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { useGetSingleUserQuery } from '../RTK/API/FakeAuth'
 
 const Login = ()=> {
     const[fname,setFname] = useState()
@@ -43,13 +44,22 @@ const Login = ()=> {
     const {LoginHandler,SignupHandler} = Function()
     
     const isAuth = Cookies.get('User')
+    const User = useGetSingleUserQuery()
+
+    console.log(User);
+
+    const Rdata = User?.data
+
+    const Dd = Rdata?.filter(data => data?.email === userData?.email )
+    const Ds = Dd?.filter(data=> data?.password === userData?.password)
+     const Fds = Ds?.find(data => data)
 
 
+  console.log(Fds);
+if (Fds?.email) {
+  Cookies.set('ID',JSON.stringify(Fds))
 
-if (userData?.id) {
-  Cookies.set('ID',userData?.id)
-
-  window.location.reload(true)
+  // window.location.reload(true)
  }
  const [showPassword, setShowPassword] = useState(false)
     
@@ -116,6 +126,11 @@ if (userData?.id) {
             >
               <Stack spacing="6">
                 <Stack  spacing="5">
+                  {
+                    !Dd?.email && <Text color={'red.500'} >
+                      Incorrect email or password!
+                    </Text>
+                  }
                   <FormControl>
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <Input value={email} onChange={(e)=> setEmail(e.target.value)} id="email" type="email" />

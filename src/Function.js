@@ -109,7 +109,6 @@ const fakeStoreLogin = (email,name,pass,setFakeData)=>{
 
 const [login] = useLoginMutation()
 const [fakeLogin] = useFakeLoginMutation()
-const navigate = useNavigate()
 const dispatch = useDispatch()
 const [createContact] = useContactMutation()
 const LoginHandler = async(e,userData,email,password,name,avatar)=>{
@@ -124,34 +123,14 @@ const LoginHandler = async(e,userData,email,password,name,avatar)=>{
       
       };
 
-      const {data} = await login(user);
-      const error = await login(user);
-     console.log(data);
-       if (data?.success) {
-       const phone= Cookies.get('LID')
+     dispatch(AddUser(user))
+     
 
-        const contact = {
-          name:data?.user?.name,
-          phone,
-          email,
-          address:'shop'
-        }
-        const newContact = await createContact(contact)
-        console.log(newContact);
-
-        if (newContact?.data?.success) {
-          Cookies.set('User',data?.token)
-          Cookies.set('LID',newContact?.data?.contact?.phone)
-
-          window.location.reload(true)
-
-        }
-
-
+    
         
-        setNewAcc(!newAcc)
+        // setNewAcc(!newAcc)
         
-      }
+      
 
 
   }catch(error){
@@ -168,43 +147,51 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
     try{
       e.preventDefault();
 
-      const user = {
+      const body = {
         name,
         email,
         password,
-        password_confirmation
-      };
-
-      const {data} = await signup(user);
-      const {error} = await signup(user);
-      console.log(error);
-      if (error) {
-        setErr(error?.data?.errors)
-        
+        avatar
       }
-      if (data?.success) {
-        const body = {
-          name,
-          email,
-          password,
-          avatar
+      const res = await fakeLogin(body)
+      console.log(res?.error?.data?.message);
+        if(res?.error?.data?.message){
+          setErr(res?.error?.data?.message)
         }
-        const res = await fakeLogin(body)
-        console.log(res?.error?.data?.message);
-          if(res?.error?.data?.message){
-            setErr(res?.error?.data?.message)
-          }
-          if (res?.data) {
-            console.log(res?.data);
-            Cookies.set('LID',res?.data?.id)
-            setNewAcc(!newAcc)
-            
-          }
-        
-      }
+        if (res?.data) {
+          console.log(res?.data);
+          Cookies.set('LID',res?.data?.id)
+          setNewAcc(!newAcc)
+          
+        }
+      
 
     }catch (error){
     }
+}
+const User = useGetSingleUserQuery()
+
+const isAuth = () =>{
+  const uDa = Cookies.get('ID')
+
+  const userData = JSON.parse(uDa)
+
+
+
+  const Rdata = User?.data
+  let is = false;
+  const Dd = Rdata?.filter(data => data?.email === userData?.email )
+  const Ds = Dd?.filter(data=> data?.password === userData?.password)
+  const Fds = Ds?.find(data => data)
+
+  Fds?.email ? (
+    is=true
+  ):(
+    is=false
+  )
+  
+
+  return {is}
 }
 
 
@@ -215,7 +202,8 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
       fakeStoreLogin,
       LoginHandler,
       SignupHandler,
-      arr 
+      arr ,
+      isAuth
     }
   )
 }

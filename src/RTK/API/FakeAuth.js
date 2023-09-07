@@ -47,8 +47,8 @@ export const fakeAuthApi = createApi({
     providesTags:["fakeAuth"]
 }),
 getSingleUser: builder.query({
-  query:(id) =>({
-      url:`/users/${id}`,
+  query:() =>({
+      url:`/users`,
       method:'GET',
       
      

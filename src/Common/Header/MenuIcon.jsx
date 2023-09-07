@@ -5,15 +5,24 @@ import { useGetContactQuery } from '../../RTK/API/Auth'
 import Cookies from 'js-cookie'
 import { useGetSingleUserQuery } from '../../RTK/API/FakeAuth'
 import { useSelector } from 'react-redux'
+import Function from '../../Function'
 
 const MenuIcon = ({Logout}) => {
 
-    const id = Cookies.get('LID')
+    const id = Cookies.get('ID')
+    const Ldata = JSON.parse(id)
+    const User = useGetSingleUserQuery()
 
-    const {data} = useGetSingleUserQuery(id)
     
-    console.log(data);
 
+    const Rdata = User?.data
+
+    const Dd = Rdata?.filter(data => data?.email === Ldata?.email )
+    const Ds = Dd?.filter(data=> data?.password === Ldata?.password)
+        const data = Ds?.find(data => data)
+
+  const {isAuth} = Function()
+  const {is} = isAuth()
 
 return (
     <Menu>

@@ -16,7 +16,7 @@ const NavBar = () => {
     search.classList.toggle('active', this.window.scrollY > 100)
 });
 
-  const token = Cookies.get("User");
+  const token = Cookies.get("ID");
 
   
   

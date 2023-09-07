@@ -1,15 +1,21 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import React from "react";
 import Home from "./Pages/Home";
 import Login from "./Auth/Login";
 import { Box, Flex } from "@chakra-ui/react";
-import Cookies from "js-cookie";
 import NavBar from "./Common/Header/NavBar";
 import Cart from "./Pages/Cart/Cart";
+import Function from "./Function";
 
 const App = () => {
-  const isAuth = Cookies.get("User");
+
+
+
+  const {isAuth} = Function()
+  const {is} = isAuth()
+
+
 
  
   return (
@@ -19,13 +25,13 @@ const App = () => {
       <Box>
         <BrowserRouter>
           <Routes>
-            {isAuth && (
+            {is && (
               <>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/cart" element={ <Cart/> } />
               </>
             )}
-            {!isAuth && <Route exact path="/" element={<Login />} />}
+            {!is && <Route exact path="/" element={<Login />} />}
           </Routes>
         </BrowserRouter>
       </Box>
