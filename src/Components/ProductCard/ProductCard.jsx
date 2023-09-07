@@ -57,9 +57,11 @@ import { FaCartPlus } from 'react-icons/fa'
     
     const [isLargerThan840] = useMediaQuery('(min-width: 840px)')
 
-    
+    // console.log(product);
     return (
-      <Stack 
+      
+      <Stack
+      
         shadow={'0px 0px 4px .5px  #121212'}
         rounded={{
             base: 'md',

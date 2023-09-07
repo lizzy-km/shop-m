@@ -33,32 +33,7 @@ const NavBar = () => {
     })
     window.location.reload(true);
   };
-  const [addProducts] =useCreateProductsMutation()
-  const [addCategory] =useCreateCategoriesMutation()
-  const newProducts = async(e) => {
-    try{
-      e.preventDefault();
-      const products = {
-        title: "Armaf Club De Nuit Intense Man Parfum (Limited Edition)",
-        price: 130,
-        description: "Selling 100% authentic brand name perfumes. Every bottle is guaranteed authentic. The merchant checks every time before buying that it is a shop that sells genuine brands only!!!",
-        categoryId: 19,
-        images: ["https://lzd-img-global.slatic.net/g/ff/kf/S24b33abd430b435791ad517959deb065V.jpg_720x720q80.jpg_.webp"]
-      }
-      const category ={
-        name: "Phone Cables & Converters ",
-        image: "https://i.pinimg.com/564x/6d/ad/1c/6dad1c7413c6dbba293b4ee4c35bdd12.jpg"
-      }
-      // const cate = await addCategory(category)
-      // console.log(cate);
-
-      const data = await addProducts(products)
-      console.log(data);
-
-    }catch(error){
-
-    }
-  }
+  
 
   return (
     <Flex 
@@ -114,11 +89,13 @@ const NavBar = () => {
           <Flex className="cart" justifyContent={'center'} alignItems={'center'} gap={'3'} >
             
             <Button 
-            onClick={newProducts}
             rounded={'full'}
             w={'30px'}
              >
+              <Link href="/addproduct" >
               <AddIcon/>
+              </Link>
+              
             </Button>
             <MenuIcon   Logout={Logout} />
 

@@ -7,6 +7,7 @@ const Category = ({load,setLoad}) => {
     const {data,isLoading} = useGetCategoriesQuery()
     const [isLargerThan840] = useMediaQuery('(min-width: 840px)')
 
+    console.log(data);
 
     
 

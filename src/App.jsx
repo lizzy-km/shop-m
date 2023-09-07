@@ -7,6 +7,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import NavBar from "./Common/Header/NavBar";
 import Cart from "./Pages/Cart/Cart";
 import Cookies from "js-cookie";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 
 const App = () => {
 
@@ -29,6 +30,8 @@ const App = () => {
               <>
                 <Route exact path="/*" element={<Home />} />
                 <Route exact path="/cart" element={ <Cart/> } />
+                <Route exact path="/addproduct" element={ <AddProduct/> } />
+
               </>
             )}
             {!is && <Route exact path="/*" element={<Login />} />}

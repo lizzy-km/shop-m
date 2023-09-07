@@ -26,7 +26,7 @@ import { useGetProductsQuery } from '../../RTK/API/FakeAuth'
 
     const ok =  useGetProductsQuery()
 
-console.log(ok);
+console.log(products);
     return (
   <Box
     // className='maxH'
