@@ -52,12 +52,19 @@ const Login = ()=> {
     const Ds = Dd?.filter(data=> data?.password === userData?.password)
      const Fds = Ds?.find(data => data)
 
+   
+
+    
 
 if (Fds?.email) {
   Cookies.set('ID',JSON.stringify(Fds))
-
   window.location.reload(true)
- }
+
+  }
+
+ 
+ 
+ 
  const [showPassword, setShowPassword] = useState(false)
     
 

@@ -6,17 +6,17 @@ import Login from "./Auth/Login";
 import { Box, Flex } from "@chakra-ui/react";
 import NavBar from "./Common/Header/NavBar";
 import Cart from "./Pages/Cart/Cart";
-import Function from "./Function";
+import Cookies from "js-cookie";
 
 const App = () => {
 
+  const pis = Cookies.get('isAuth')
 
+  let is = false ;
 
-  const {isAuth} = Function()
-  const {is} = isAuth()
-
-
-
+     pis ? (is = JSON.parse(pis)):(
+      is = false
+     )
  
   return (
     <Flex w={"100%"}  overflow={'hidden'} flexDirection={"column"}>

@@ -11,15 +11,18 @@ import {
 import {  useSelector } from 'react-redux'
 import { CartItem } from './Cartitem'
 import Cookies from 'js-cookie'
-import Function from '../../Function'
   
 const Cart = () =>
  {
     const cartData = useSelector(state => state.CartSlice.cart)
     
-    const {isAuth} = Function()
-    const {is} = isAuth()
+    const pis = Cookies.get('isAuth')
+    let is = true ;
 
+     pis ? (is = JSON.parse(pis)):(
+      is = false
+     )
+     console.log(is);
     if (!is) {
       window.location.replace('/')
     }

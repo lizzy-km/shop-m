@@ -5,6 +5,7 @@ import { AddUser } from "./RTK/Services/AuthSlice";
 import Cookies from "js-cookie";
 import { useFakeLoginMutation, useGetSingleUserQuery } from "./RTK/API/FakeAuth";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Function =()=>{
   const userData = useSelector(state => state.AuthSlice.user)
@@ -154,31 +155,39 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
     }
 }
 const User = useGetSingleUserQuery()
-
+// const[is,setIs] = useState(false)
+let is = false
 const isAuth = () =>{
   const uDa = Cookies.get('ID')
 let userData
   uDa ? (userData = JSON.parse(uDa)):(
     userData
   )
-
-
-
   const Rdata = User?.data
-  let is = false;
   const Dd = Rdata?.filter(data => data?.email === userData?.email )
   const Ds = Dd?.filter(data=> data?.password === userData?.password)
   const Fds = Ds?.find(data => data)
 
   Fds?.email ? (
-    is=true
-  ):(
-    is=false
+is =true  ):(
+is= false
   )
+
+  
+  useEffect(()=>{
+    // if (is ===true) {
+      Cookies.set('isAuth',is)
+
+    // }
+  
+  },[is])
+
   
 
   return {is}
 }
+
+
 
 
 
