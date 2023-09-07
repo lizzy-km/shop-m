@@ -25,69 +25,150 @@ const CategoryList = ({load,setLoad}) => {
   return (
     <>{
         isLargerThan840 ? (
-            <Tabs  colorScheme='blue'
+            // <Tabs  colorScheme='blue'
+            // roundedBottom={{
+            //     base:'base',
+            //     md:'md',
+            //     lg:'lg',
+            //     xl:'xl'
+            // }}
+            // shadow={'0px 3px 8px #121212'}
+
+            // maxH={'400px'}
+            // overflowY={'scroll'}
+            // flexDirection={'column'}
+            // gap={'4'}
+    
+            //  >
+            //     <TabList 
+            //     px={'8'}
+            //     py={'4'}
+    
+            //     flexDirection={'column'}
+            //     gap={'4'}
+            //      >
+            //             <Tab _hover={{
+            //                 bg:'blackAlpha.400'
+            //             }} 
+            //             rounded={{
+            //                 base:'base',
+            //                 md:'md',
+            //                 lg:'lg',
+            //                 xl:'xl'
+            //             }} 
+            //             id={''} onClick={()=> setName('')}
+            //                 key={''}
+            //                 display={'flex'}
+            //                 justifyContent={'space-between'}
+            //                 maxW={'100%'}
+            //                 minW={'100%'}
+            //                  > 
+            //                 <Text> All </Text>
+                            
+            //                 </Tab>                      {
+            //         Cat?.map(data => {
+            //             return(
+            //                 <Tab    _hover={{
+            //                     bg:'blackAlpha.400'
+            //                 }}
+            //                 rounded={{
+            //                     base:'base',
+            //                     md:'md',
+            //                     lg:'lg',
+            //                     xl:'xl'
+            //                 }}    
+            //                 id={data?.name} onClick={()=> setName(data?.name)}
+            //                 key={data?.id}
+            //                 display={'flex'}
+            //                 justifyContent={'space-between'}
+            //                 maxW={'100%'}
+            //                 minW={'100%'}
+            //                  > 
+            //                 <Text> {data?.name} </Text>
+            //                 <Image 
+            //                 w={'30px'}
+            //                 h={'30px'} 
+     
+            //                 rounded={'md'}
+            //                 src={data?.image} />
+            //                 </Tab>
+    
+            //             )
+            //         })
+            //     }
+            //     </TabList>
+               
+            // </Tabs>
+            <Tabs colorScheme='blue'
+            display={'flex'}
+
+            bg={useColorModeValue('gray.400', 'blackAlpha.800')}            alignItems={'center'}
             roundedBottom={{
                 base:'base',
                 md:'md',
                 lg:'lg',
                 xl:'xl'
             }}
-            shadow={'0px 3px 8px #121212'}
 
-            maxH={'400px'}
-            overflowY={'scroll'}
-            flexDirection={'column'}
+            h={'auto'}
             gap={'4'}
+            flexWrap={'wrap'}
+            p={'3'}
     
              >
                 <TabList 
-                px={'8'}
+                // px={'8'}
                 py={'4'}
-    
-                flexDirection={'column'}
+                display={'flex'}
+                flexDirection={'row'}
+                flexWrap={'wrap'}
                 gap={'4'}
                  >
-                        <Tab _hover={{
+                    <Tab _hover={{
                             bg:'blackAlpha.400'
                         }} 
-                        rounded={{
-                            base:'base',
-                            md:'md',
-                            lg:'lg',
-                            xl:'xl'
-                        }} 
+                       
                         id={''} onClick={()=> setName('')}
                             key={''}
                             display={'flex'}
-                            justifyContent={'space-between'}
-                            maxW={'100%'}
-                            minW={'100%'}
-                             > 
-                            <Text> All </Text>
-                            
-                            </Tab>                      {
-                    Cat?.map(data => {
-                        return(
-                            <Tab    _hover={{
-                                bg:'blackAlpha.400'
-                            }}
+                            alignItems={'center'}
+                            justifyContent={'center'}
+                            maxW={'10%'}
+                            minW={'10%'}
                             rounded={{
                                 base:'base',
                                 md:'md',
                                 lg:'lg',
                                 xl:'xl'
-                            }}    
+                            }}
+                             > 
+                            <Text> All </Text>
+                            
+                            </Tab>
+                {
+                    Cat?.map(data => {
+                        return(
+                            <Tab _hover={{
+                                bg:'blackAlpha.400'
+                            }}
                             id={data?.name} onClick={()=> setName(data?.name)}
-                            key={data?.id}
                             display={'flex'}
+                            flexDirection={'column-reverse'}
                             justifyContent={'space-between'}
-                            maxW={'100%'}
-                            minW={'100%'}
+                            maxW={'10%'}
+                            minW={'10%'}
+                           
+                            rounded={{
+                                base:'base',
+                                md:'md',
+                                lg:'lg',
+                                xl:'xl'
+                            }}
                              > 
                             <Text> {data?.name} </Text>
                             <Image 
-                            w={'30px'}
-                            h={'30px'} 
+                            w={'50%'}
+                            // h={'30px'} 
      
                             rounded={'md'}
                             src={data?.image} />
@@ -133,8 +214,8 @@ const CategoryList = ({load,setLoad}) => {
                             key={''}
                             display={'flex'}
                             justifyContent={'space-between'}
-                            maxW={'15%'}
-                            minW={'15%'}
+                            maxW={'10%'}
+                            minW={'5%'}
                              > 
                             <Text> All </Text>
                             
@@ -146,15 +227,10 @@ const CategoryList = ({load,setLoad}) => {
                             display={'flex'}
                             justifyContent={'space-between'}
                             maxW={'15%'}
-                            minW={'15%'}
+                            minW={'5%'}
                              > 
                             <Text> {data?.name} </Text>
-                            <Image 
-                            w={'30px'}
-                            h={'30px'} 
-     
-                            rounded={'md'}
-                            src={data?.image} />
+                            
                             </Tab>
     
                         )

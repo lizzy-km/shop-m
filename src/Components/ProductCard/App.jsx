@@ -58,8 +58,8 @@ import Cookies from 'js-cookie'
         <Skeleton 
         position="relative"
         w={{
-          base:'100%',
-          md:'100px',
+          base:'200px',
+          md:'200px',
           lg:'200px',
           xl:'210px'
         }}

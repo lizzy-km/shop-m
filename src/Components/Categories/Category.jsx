@@ -26,7 +26,8 @@ const Category = ({load,setLoad}) => {
     }}
      >
         {
-            isLargerThan840 && <Box 
+            isLargerThan840 &&
+             <Box 
             p={'4'}
             w={'100%'}
             shadow={'0px -3px 8px #121212'}

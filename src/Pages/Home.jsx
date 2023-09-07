@@ -30,12 +30,14 @@ const Home = () => {
         isLargerThan840 ? (
           <Flex 
           py={'6'}
+          flexDirection={'column'}
+
           
            >
-            <Flex w={"20%"}>
+            <Flex w={"100%"}>
               <Category load={load} setLoad={setLoad} />
             </Flex>
-            <Flex w={"80%"}>
+            <Flex w={"100%"}>
               <App load={load} setLoad={setLoad} />
             </Flex>
           </Flex>
