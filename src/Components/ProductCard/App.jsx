@@ -191,7 +191,7 @@ products?.map((product) => (
       }
       
       {
-        !isLoading && catName === '' && <Button onClick={()=> setCount(count+20)} bg={'transparent'} alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
+        !isLoading && catName === '' && <Button onClick={()=> setCount(count+20)}  alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
 
       }
     </ProductGrid>
