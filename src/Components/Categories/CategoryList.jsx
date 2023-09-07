@@ -222,6 +222,12 @@ const CategoryList = ({load,setLoad}) => {
                             justifyContent={'space-between'}
                             maxW={'10%'}
                             minW={'5%'}
+                            rounded={{
+                                base:'base',
+                                md:'md',
+                                lg:'lg',
+                                xl:'xl'
+                            }}
                              > 
                             <Text> All </Text>
                             
@@ -234,6 +240,12 @@ const CategoryList = ({load,setLoad}) => {
                             justifyContent={'space-between'}
                             maxW={'15%'}
                             minW={'5%'}
+                            rounded={{
+                                base:'base',
+                                md:'md',
+                                lg:'lg',
+                                xl:'xl'
+                            }}
                              > 
                             <Text> {data?.name} </Text>
                             
