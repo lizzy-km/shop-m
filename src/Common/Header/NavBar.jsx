@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Badge, Box, Button, Flex, Icon, Link, useColorMode } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex,  Link, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { useLogoutMutation } from "../../RTK/API/Auth";
 import Cookies from "js-cookie";
@@ -6,7 +6,6 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import MenuIcon from "./MenuIcon";
 import { HiShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import { useGetSingleUserQuery } from "../../RTK/API/FakeAuth";
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();

@@ -1,10 +1,8 @@
 import React from 'react'
 import { Avatar,  Button,    Menu,  MenuButton,  MenuDivider,  MenuItem,  MenuList,    } from '@chakra-ui/react'
 import { HiLogout, HiOutlineLockClosed, HiOutlineUserCircle } from 'react-icons/hi'
-import { useGetContactQuery } from '../../RTK/API/Auth'
 import Cookies from 'js-cookie'
 import { useGetSingleUserQuery } from '../../RTK/API/FakeAuth'
-import { useSelector } from 'react-redux'
 import Function from '../../Function'
 
 const MenuIcon = ({Logout}) => {

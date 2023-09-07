@@ -43,10 +43,8 @@ const Login = ()=> {
 
     const {LoginHandler,SignupHandler} = Function()
     
-    const isAuth = Cookies.get('User')
     const User = useGetSingleUserQuery()
 
-    console.log(User);
 
     const Rdata = User?.data
 
@@ -55,11 +53,10 @@ const Login = ()=> {
      const Fds = Ds?.find(data => data)
 
 
-  console.log(Fds);
 if (Fds?.email) {
   Cookies.set('ID',JSON.stringify(Fds))
 
-  // window.location.reload(true)
+  window.location.reload(true)
  }
  const [showPassword, setShowPassword] = useState(false)
     

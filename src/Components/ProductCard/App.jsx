@@ -2,15 +2,13 @@ import { AspectRatio, Badge, Box, Button, Skeleton, Stack, Text, useColorModeVal
 import { ProductCard } from './ProductCard'
 import { ProductGrid } from './ProductGrid'
 import data from './data'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
-import { FaArrowAltCircleRight, FaArrowRight } from 'react-icons/fa'
-import { HiOutlineArrowCircleRight, HiOutlineArrowRight } from 'react-icons/hi'
 import Function from '../../Function'
 import Cookies from 'js-cookie'
 
  const App = ({load}) =>{
-    const {products,isLoading,filterProducts,setCount,count,name,filterProductsCat} = data()
+    const {isLoading,filterProducts,setCount,count,filterProductsCat} = data()
     const {arr} = Function()
 
     const {Realproducts}  =filterProducts()
@@ -22,7 +20,6 @@ import Cookies from 'js-cookie'
       catName = Cookies.get('CatName')
     },[load])
 
-    console.log(RealProducts);
     
 
     return (

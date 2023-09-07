@@ -3,9 +3,7 @@
 import axios from "axios";
 import { AddUser } from "./RTK/Services/AuthSlice";
 import Cookies from "js-cookie";
-import { useContactMutation, useLoginMutation, useRegisterMutation } from "./RTK/API/Auth";
 import { useFakeLoginMutation, useGetSingleUserQuery } from "./RTK/API/FakeAuth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const Function =()=>{
@@ -53,7 +51,6 @@ const Function =()=>{
   const isPalimdrome =(word)=>{
     var letter = [];
     var Rword ='';
-    let Result;
     for(var i = 0; i<word.length; i++){
         letter.push(word[i])
       }
@@ -107,10 +104,8 @@ const fakeStoreLogin = (email,name,pass,setFakeData)=>{
             // return data
 }
 
-const [login] = useLoginMutation()
 const [fakeLogin] = useFakeLoginMutation()
 const dispatch = useDispatch()
-const [createContact] = useContactMutation()
 const LoginHandler = async(e,userData,email,password,name,avatar)=>{
   
   try{
@@ -125,21 +120,12 @@ const LoginHandler = async(e,userData,email,password,name,avatar)=>{
 
      dispatch(AddUser(user))
      
-
-    
-        
-        // setNewAcc(!newAcc)
-        
-      
-
-
   }catch(error){
   }
 }
 
 
 
-const [signup] = useRegisterMutation()
 
 
 const SignupHandler = async(e,name,email,password,password_confirmation,setNewAcc,newAcc,avatar,setErr)=>{
@@ -154,12 +140,10 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
         avatar
       }
       const res = await fakeLogin(body)
-      console.log(res?.error?.data?.message);
         if(res?.error?.data?.message){
           setErr(res?.error?.data?.message)
         }
         if (res?.data) {
-          console.log(res?.data);
           Cookies.set('LID',res?.data?.id)
           setNewAcc(!newAcc)
           

@@ -11,8 +11,6 @@ import {
 import {  useSelector } from 'react-redux'
 import { CartItem } from './Cartitem'
 import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
-import { useGetSingleUserQuery } from '../../RTK/API/FakeAuth'
 import Function from '../../Function'
   
 const Cart = () =>

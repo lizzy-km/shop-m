@@ -1,8 +1,7 @@
 import axios from "axios"
 import { useGetProductsQuery } from "../../RTK/API/FakeAuth"
-import { useCallback, useEffect, useState } from "react"
+import {  useState } from "react"
 import Cookies from "js-cookie"
-import Category from "../Categories/Category"
 
 const data = ()=> {
 
