@@ -74,7 +74,7 @@ import { FaCartPlus } from 'react-icons/fa'
         <Box position="relative">
         <AspectRatio ratio={4 / 3}>
           <Image
-                        src={images[2]}
+                        src={images[0]}
                         alt={title}
                         draggable="false"
                         fallback={<Skeleton borderTopRadius={{

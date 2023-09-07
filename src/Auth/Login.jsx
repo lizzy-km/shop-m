@@ -19,7 +19,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react'
   
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Logo } from './LoginUtil/Logo'
 import { PasswordField } from './LoginUtil/PasswordField'
 import { OAuthButtonGroup } from './LoginUtil/OAuthButtonGroup'
@@ -53,8 +53,10 @@ const Login = ()=> {
      const Fds = Ds?.find(data => data)
 
    
-
     
+
+        
+    let pis;
 
 if (Fds?.email) {
   Cookies.set('ID',JSON.stringify(Fds))
@@ -62,7 +64,16 @@ if (Fds?.email) {
 
   }
 
- 
+
+  const {isAuth} = Function()
+  const {is} = isAuth()
+
+  if (is) {
+    window.location.reload(true)
+  }
+
+  
+  
  
  
  const [showPassword, setShowPassword] = useState(false)

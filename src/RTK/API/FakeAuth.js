@@ -21,7 +21,7 @@ export const fakeAuthApi = createApi({
     }),
     getProducts: builder.query({
       query:() =>({
-          url:`/products`,
+          url:`/products/`,
           method:'GET',
           
          
@@ -55,6 +55,26 @@ getSingleUser: builder.query({
   }),
   providesTags:["fakeAuth"]
 }),
+createProducts: builder.mutation({
+  query:(products) =>({
+      url:`/products/`,
+      method:'POST',
+      body:products
+      
+     
+  }),
+  invalidatesTags:["fakeAuth"]
+}),
+createCategories: builder.mutation({
+  query:(category) =>({
+      url:`/categories/`,
+      method:'POST',
+      body:category
+      
+     
+  }),
+  invalidatesTags:["fakeAuth"]
+}),
 
 
     
@@ -62,4 +82,12 @@ getSingleUser: builder.query({
   
 })
 
-export const { useFakeLoginMutation,useGetProductsQuery,useGetSingleProductsQuery,useGetSingleUserQuery,useGetCategoriesQuery } = fakeAuthApi
+export const { 
+  useFakeLoginMutation,
+  useGetProductsQuery,
+  useGetSingleProductsQuery,
+  useGetSingleUserQuery,
+  useGetCategoriesQuery,
+  useCreateProductsMutation,
+  useCreateCategoriesMutation
+ } = fakeAuthApi

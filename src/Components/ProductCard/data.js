@@ -42,7 +42,7 @@ const data = ()=> {
     const filterProducts = ()=> {
        
         if (name === '') {
-            Realproducts = data?.filter(item =>  item?.id <count)
+            Realproducts = data?.filter(item =>  item?.id)
 
         }
            

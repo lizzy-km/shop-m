@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
 import Function from '../../Function'
 import Cookies from 'js-cookie'
+import { useGetProductsQuery } from '../../RTK/API/FakeAuth'
 
  const App = ({load}) =>{
     const {isLoading,filterProducts,setCount,count,filterProductsCat} = data()
@@ -23,6 +24,9 @@ import Cookies from 'js-cookie'
     const products = Realproducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
     const fProducts = RealProducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
 
+    const ok =  useGetProductsQuery()
+
+console.log(ok);
     return (
   <Box
     // className='maxH'
@@ -175,13 +179,7 @@ import Cookies from 'js-cookie'
           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
         ))
       }
-      { !isLoading && RealProducts?.length ===0 &&
-
-products?.map((product) => (
-           <ProductCard  fallback={<Skeleton />} key={product.id} product={product} />
-      ))
-
-}
+     
       { !isLoading && RealProducts?.length >0 &&
 
         fProducts?.map((product) => (
@@ -191,7 +189,7 @@ products?.map((product) => (
       }
       
       {
-        !isLoading && catName === '' && <Button onClick={()=> setCount(count+20)}  alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
+       ok?.data?.length > 40&& !isLoading && catName === '' && <Button onClick={()=> setCount(count+20)}  alignSelf={'center'} w={'60px'} h={'60px'} rounded={'full'} gap={'2'} ><Text>More</Text> <ArrowRightIcon alignSelf={'center'}  /> </Button>
 
       }
     </ProductGrid>

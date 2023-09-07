@@ -2,10 +2,11 @@ import { Badge, Box, Button, Flex,  Link, useColorMode } from "@chakra-ui/react"
 import React from "react";
 import { useLogoutMutation } from "../../RTK/API/Auth";
 import Cookies from "js-cookie";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { AddIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import MenuIcon from "./MenuIcon";
 import { HiShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
+import { useCreateCategoriesMutation, useCreateProductsMutation } from "../../RTK/API/FakeAuth";
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -32,6 +33,32 @@ const NavBar = () => {
     })
     window.location.reload(true);
   };
+  const [addProducts] =useCreateProductsMutation()
+  const [addCategory] =useCreateCategoriesMutation()
+  const newProducts = async(e) => {
+    try{
+      e.preventDefault();
+      const products = {
+        title: "Armaf Club De Nuit Intense Man Parfum (Limited Edition)",
+        price: 130,
+        description: "Selling 100% authentic brand name perfumes. Every bottle is guaranteed authentic. The merchant checks every time before buying that it is a shop that sells genuine brands only!!!",
+        categoryId: 19,
+        images: ["https://lzd-img-global.slatic.net/g/ff/kf/S24b33abd430b435791ad517959deb065V.jpg_720x720q80.jpg_.webp"]
+      }
+      const category ={
+        name: "Phone Cables & Converters ",
+        image: "https://i.pinimg.com/564x/6d/ad/1c/6dad1c7413c6dbba293b4ee4c35bdd12.jpg"
+      }
+      const cate = await addCategory(category)
+      console.log(cate);
+
+      // const data = await addProducts(products)
+      // console.log(data);
+
+    }catch(error){
+
+    }
+  }
 
   return (
     <Flex 
@@ -86,6 +113,13 @@ const NavBar = () => {
         {token && (
           <Flex className="cart" justifyContent={'center'} alignItems={'center'} gap={'3'} >
             
+            <Button 
+            onClick={newProducts}
+            rounded={'full'}
+            w={'30px'}
+             >
+              <AddIcon/>
+            </Button>
             <MenuIcon   Logout={Logout} />
 
             <Button  position={'relative'} rounded={'full'} w={'30px'} p={'0'}  as="button" aria-label="notifications" icon={HiShoppingCart}  >

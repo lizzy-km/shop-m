@@ -27,7 +27,7 @@ const App = () => {
           <Routes>
             {is && (
               <>
-                <Route exact path="/" element={<Home />} />
+                <Route exact path="/*" element={<Home />} />
                 <Route exact path="/cart" element={ <Cart/> } />
               </>
             )}
