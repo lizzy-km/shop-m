@@ -157,8 +157,10 @@ const User = useGetSingleUserQuery()
 
 const isAuth = () =>{
   const uDa = Cookies.get('ID')
-
-  const userData = JSON.parse(uDa)
+let userData
+  uDa ? (userData = JSON.parse(uDa)):(
+    userData
+  )
 
 
 
