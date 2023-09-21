@@ -19,8 +19,7 @@ const MenuIcon = ({Logout}) => {
     const Ds = Dd?.filter(data=> data?.password === Ldata?.password)
         const data = Ds?.find(data => data)
 
-  const {isAuth} = Function()
-  const {is} = isAuth()
+  
 
 return (
     <Menu>

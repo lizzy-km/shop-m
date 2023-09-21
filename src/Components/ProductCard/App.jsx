@@ -23,10 +23,9 @@ import { useGetProductsQuery } from '../../RTK/API/FakeAuth'
 
     const products = Realproducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
     const fProducts = RealProducts?.filter(data => data?.images[0] !== 'https://placeimg.com/640/480/any')
-
+    console.log(Realproducts);
     const ok =  useGetProductsQuery()
 
-console.log(products);
     return (
   <Box
     // className='maxH'

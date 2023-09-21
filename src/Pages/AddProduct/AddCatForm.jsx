@@ -5,7 +5,7 @@ import { useCreateCategoriesMutation, useGetCategoriesQuery } from '../../RTK/AP
 
 const AddCatForm = ({setCategoryType}) => {
 
-    const [addCategory] =useCreateCategoriesMutation()
+    const [addCategory,{isLoading}] =useCreateCategoriesMutation()
     const[name,setName] = useState()
     const[image,setImage] = useState('https://i.pinimg.com/564x/cd/12/b6/cd12b6abe71866fd0d989ba932ec2f94.jpg')
 
@@ -24,12 +24,20 @@ const AddCatForm = ({setCategoryType}) => {
             if (cate?.data) {
                 toast({
                     position: 'top-right',
-                    title: 'Category created.',
+                    title: 'Category created successfully.',
                     status: 'success',
                     duration: 2000,
                     isClosable: true,
                   })
-            }
+            }else{
+              toast({
+                  position: 'top-right',
+                  title: 'Failed to create new category!',
+                  status: 'error',
+                  duration: 2000,
+                  isClosable: true,
+                })
+          }
     
         }catch(error){
     
@@ -74,10 +82,19 @@ const AddCatForm = ({setCategoryType}) => {
     </FormControl>
    </Flex>
    <Button 
-   onClick={newCategory}
+        bg={
+            isLoading ? 'blackAlpha.500' : 'gray.700'
+        }
+        cursor={
+            isLoading? 'not-allowed' : 'pointer'
+        }
+   onClick={
+    isLoading ? '' :
+    newCategory
+}
    rounded={'md'}
     >
-        Create Category
+        Add Product
    </Button>
   
   </MenuList>

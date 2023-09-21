@@ -42,9 +42,13 @@ const data = ()=> {
     const filterProducts = ()=> {
        
         if (name === '') {
-            Realproducts = data?.filter(item =>  item?.id)
+           const Realproduct = data?.filter(item =>  item?.id)
+           const IndexOfP = Realproduct?.find(item => item)
+            Realproducts =Realproduct?.filter(item => item?.id <  IndexOfP?.id + count )
 
         }
+
+        
            
         
         return {

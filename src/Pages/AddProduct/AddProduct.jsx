@@ -3,6 +3,7 @@ import {  useCreateProductsMutation } from '../../RTK/API/FakeAuth'
 import {  Flex, Text } from '@chakra-ui/react'
 import CategoryList from './CategoryList'
 import AddCatForm from './AddCatForm'
+import AddProductForm from './AddProductForm'
 
 const AddProduct = () => {
     const [addProducts] =useCreateProductsMutation()
@@ -32,26 +33,49 @@ const AddProduct = () => {
   
   return (
     <Flex
+    flexDirection={'column'}
+    gap={'20'}
+
     mt={'90px'}
     w={'100%'}
-    justify={'center'}
+    justifyContent={'center'}
+    alignItems={'center'}
     >
         <Flex
+        flexDirection={'column'}
         gap={'8'} 
         justify={'center'}
          >
         <Text
         fontSize={'2xl'}
         fontWeight={'semibold'}
-         >Add New Product</Text>
+         >Create New Product</Text>
          <Flex 
          gap={'2'}
           >
          <CategoryList setCateId={setCateId} categoryType={categoryType} setCategoryType={setCategoryType} />
         <AddCatForm setCategoryType={setCategoryType}/>
          </Flex>
+
+        
          
         </Flex>
+
+        <Flex
+         justifyContent={'center'}
+         justify={'center'}
+ 
+         alignItems={'center'}
+         w={'100%'}
+          >
+          <AddProductForm cateId={cateId} />
+         </Flex>
+
+         <Flex 
+         p={'1rem'}
+          >
+
+         </Flex>
        
     </Flex>
   )

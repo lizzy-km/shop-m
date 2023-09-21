@@ -130,11 +130,13 @@ const CategoryList = ({load,setLoad}) => {
             justifyContent={'space-between'}
             w={'100%'}
                  >
-                    <Tab _hover={{
-                            bg:'blackAlpha.400'
+                    <Tab 
+                    _hover={{
+                            bg:'blue.400'
                         }} 
                        
-                        id={''} onClick={()=> setName('')}
+                        id={''} 
+                        onClick={()=> setName('')}
                             key={''}
                             display={'flex'}
                             alignItems={'center'}

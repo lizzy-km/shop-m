@@ -2,13 +2,13 @@ import React from 'react'
 import { useGetCategoriesQuery } from '../../RTK/API/FakeAuth'
 import { Box, Flex,   Skeleton,   Text,  useColorModeValue, useMediaQuery } from '@chakra-ui/react';
 import CategoryList from './CategoryList';
+import Cookies from 'js-cookie';
 
 const Category = ({load,setLoad}) => {
     const {data,isLoading} = useGetCategoriesQuery()
     const [isLargerThan840] = useMediaQuery('(min-width: 840px)')
 
-    console.log(data);
-
+    const CategoryName = Cookies?.get('CatName')
     
 
   return (
@@ -29,6 +29,8 @@ const Category = ({load,setLoad}) => {
         {
             isLargerThan840 &&
              <Box 
+             display={'flex'}
+             gap={'4'}
             p={'4'}
             w={'100%'}
             // shadow={'0px -3px 8px #121212'}
@@ -43,8 +45,11 @@ const Category = ({load,setLoad}) => {
             color={useColorModeValue('white', 'gray.200')}
              >
                 <Text>
-                    Category
+                   <pre>Category  -</pre> 
                 </Text>
+                <Text
+                color={'blue.600'} 
+                 > { CategoryName ? CategoryName : 'All'} </Text>
             </Box>
         }
         

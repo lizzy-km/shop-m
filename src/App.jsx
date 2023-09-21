@@ -11,13 +11,7 @@ import AddProduct from "./Pages/AddProduct/AddProduct";
 
 const App = () => {
 
-  const pis = Cookies.get('isAuth')
-
-  let is = false ;
-
-     pis ? (is = JSON.parse(pis)):(
-      is = false
-     )
+ 
  
   return (
     <Flex w={"100%"}  overflow={'hidden'} flexDirection={"column"}>
@@ -26,15 +20,13 @@ const App = () => {
       <Box>
         <BrowserRouter>
           <Routes>
-            {is && (
               <>
                 <Route exact path="/*" element={<Home />} />
                 <Route exact path="/cart" element={ <Cart/> } />
                 <Route exact path="/addproduct" element={ <AddProduct/> } />
 
               </>
-            )}
-            {!is && <Route exact path="/*" element={<Login />} />}
+           
           </Routes>
         </BrowserRouter>
       </Box>

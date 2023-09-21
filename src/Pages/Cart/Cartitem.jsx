@@ -89,12 +89,12 @@ export const CartItem = (props) => {
         }}
       >
         <ButtonGroup>
-            <Button>
-                <AddIcon onClick={addQty} />
+            <Button onClick={addQty}>
+                <AddIcon  />
             </Button>
             <Button> {quantity} </Button>
-            <Button>
-                <MinusIcon onClick={minusQty} />
+            <Button onClick={minusQty}>
+                <MinusIcon  />
             </Button>
         </ButtonGroup>
        

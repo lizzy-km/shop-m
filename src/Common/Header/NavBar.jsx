@@ -85,22 +85,35 @@ const NavBar = () => {
       </Flex>
 
       <Flex alignItems={'center'} justify={'center'} gap={"3"}>
-        {token && (
           <Flex className="cart" justifyContent={'center'} alignItems={'center'} gap={'3'} >
             
             <Button 
             rounded={'full'}
             w={'30px'}
              >
-              <Link href="/addproduct" >
+              <Link 
+              rounded={'full'} 
+              w={'30px'} 
+              h={'30px'}
+              display={'flex'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              href="/addproduct" >
               <AddIcon/>
               </Link>
               
             </Button>
-            <MenuIcon   Logout={Logout} />
+            {/* <MenuIcon   Logout={Logout} /> */}
 
             <Button  position={'relative'} rounded={'full'} w={'30px'} p={'0'}  as="button" aria-label="notifications" icon={HiShoppingCart}  >
-              <Link href="/cart" >
+              <Link
+              rounded={'full'} 
+              w={'30px'} 
+              h={'30px'}
+              display={'flex'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              href="/cart" >
               {
                 cart?.length >0 &&             <Badge top={'-1'} right={'-1'} position={'absolute'} roundedBottomRight={'full'} roundedTop={'full'} boxSize="1rem" color="red.500"> {cart?.length} </Badge>
 
@@ -110,7 +123,6 @@ const NavBar = () => {
              
             </Button>
           </Flex>
-        )}
 
         <Box>
           <Button rounded={"full"} w={'30px'} onClick={toggleColorMode}>

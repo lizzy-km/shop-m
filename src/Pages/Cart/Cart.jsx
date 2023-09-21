@@ -16,16 +16,7 @@ const Cart = () =>
  {
     const cartData = useSelector(state => state.CartSlice.cart)
     
-    const pis = Cookies.get('isAuth')
-    let is = true ;
-
-     pis ? (is = JSON.parse(pis)):(
-      is = false
-     )
-     console.log(is);
-    if (!is) {
-      window.location.replace('/')
-    }
+   
     
     const cart = useSelector(state => state.CartSlice.cart)
     let totalamount =0;
