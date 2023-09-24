@@ -3,6 +3,7 @@
 *{
   font-family: 'Raleway', sans-serif !important;
   scrollbar-width: none;
+  transition: .5s all;
 }
 *::-webkit-scrollbar{
   display: none;

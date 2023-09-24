@@ -8,6 +8,7 @@ import NavBar from "./Common/Header/NavBar";
 import Cart from "./Pages/Cart/Cart";
 import Cookies from "js-cookie";
 import AddProduct from "./Pages/AddProduct/AddProduct";
+import Quantum from "./Pages/Quantum";
 
 const App = () => {
 
@@ -24,6 +25,8 @@ const App = () => {
                 <Route exact path="/*" element={<Home />} />
                 <Route exact path="/cart" element={ <Cart/> } />
                 <Route exact path="/addproduct" element={ <AddProduct/> } />
+                <Route exact path="/qm" element={ <Quantum/> } />
+
 
               </>
            
