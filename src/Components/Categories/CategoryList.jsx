@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useGetCategoriesQuery } from '../../RTK/API/FakeAuth';
-import { Box, Button, ButtonGroup, Flex, Image,  Tab,  TabList,  Tabs,  Text,  useColorModeValue, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, Image,  Skeleton,  Tab,  TabList,  Tabs,  Text,  useColorModeValue, useMediaQuery } from '@chakra-ui/react';
 import data from '../ProductCard/data';
 import Cookies from 'js-cookie';
 
@@ -58,7 +58,7 @@ const CategoryList = ({load,setLoad}) => {
                 flexWrap={'wrap'}
                 gap={'4'}
                 
-            justifyContent={'space-between'}
+            justifyContent={'flex-start'}
             w={'100%'}
                  >
                     <Tab 
@@ -111,6 +111,8 @@ const CategoryList = ({load,setLoad}) => {
                             justifyContent={'space-between'}
                             maxW={'150px'}
                             minW={'150px'}
+                            maxH={'150px'}
+                            minH={'150px'}
                            
                             rounded={{
                                 base:'base',
@@ -128,11 +130,17 @@ const CategoryList = ({load,setLoad}) => {
                             > {data?.name} </Text>
 
                             <Image 
-                            
+                            fallback={<Skeleton
+                                roundedTop={'lg'}
+                                w={'100%'}
+                                maxH={'83%'}
+                            />}
                             bg={'blackAlpha.800'}
                             roundedTop={'lg'}
                             w={'100%'}
-                            h={'83%'}
+                            maxH={'80%'}
+                            minH={'80%'}
+
                             objectFit={'cover'}
      
                             src={data?.image} />
