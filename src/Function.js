@@ -157,29 +157,29 @@ const SignupHandler = async(e,name,email,password,password_confirmation,setNewAc
 const User = useGetSingleUserQuery()
 // const[is,setIs] = useState(false)
 let is = false
+
+
 const isAuth = () =>{
-  const uDa = Cookies.get('ID')
-let userData
-  uDa ? (userData = JSON.parse(uDa)):(
+  const uData = Cookies.get('ID')
+  let userData
+  uData ? (userData = JSON.parse(uData)):(
     userData
   )
-  const Rdata = User?.data
-  const Dd = Rdata?.filter(data => data?.email === userData?.email )
-  const Ds = Dd?.filter(data=> data?.password === userData?.password)
-  const Fds = Ds?.find(data => data)
+  // const realdata = User?.data
+  // const checkEmail = realdata?.filter(data => data?.email === userData?.email )
+  // const checkPass = checkEmail?.filter(data=> data?.password === userData?.password)
+  const finalCheck = User?.data?.
+                      filter(data => data?.email === userData?.email )?.
+                      filter(data=> data?.password === userData?.password)?.
+                      find(data => data) 
 
-  Fds?.email ? (
-is =true  ):(
-is= false
-  )
+  finalCheck?.email ? (is =true  ):(is= false )
 
   
   useEffect(()=>{
-    // if (is ===true) {
+
       Cookies.set('isAuth',is)
 
-    // }
-  
   },[is])
 
   

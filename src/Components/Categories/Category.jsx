@@ -41,15 +41,28 @@ const Category = ({load,setLoad}) => {
                 lg:'lg',
                 xl:'xl'
             }}
-            bg={useColorModeValue('gray.500', 'blackAlpha.800')}
+            // bg={useColorModeValue('gray.500', 'blackAlpha.800')}
             color={useColorModeValue('white', 'gray.200')}
              >
-                <Text>
-                   <pre>Category  -</pre> 
+                <Flex
+                gap={'0'}
+
+                >
+                <Text
+                bg={'blackAlpha.800'}
+                p={'2'}
+                roundedLeft={'lg'}
+                >
+                   <pre>Category</pre> 
                 </Text>
                 <Text
-                color={'blue.600'} 
+                color={'blue.900'} 
+                bg={'gray.400'}
+                p={'2'}
+                roundedRight={'lg'}
                  > { CategoryName ? CategoryName : 'All'} </Text>
+                </Flex>
+                
             </Box>
         }
         

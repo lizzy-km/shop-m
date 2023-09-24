@@ -1,12 +1,11 @@
-import { Badge, Box, Button, Flex,  Link, useColorMode } from "@chakra-ui/react";
-import React from "react";
+import { Badge, Box, Button, Flex,  FormControl,  Icon,  Image,  Input,  Link, Skeleton, SkeletonCircle, Text, border, useColorMode } from "@chakra-ui/react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLogoutMutation } from "../../RTK/API/Auth";
 import Cookies from "js-cookie";
-import { AddIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import MenuIcon from "./MenuIcon";
+import { AddIcon, MoonIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
 import { HiShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import { useCreateCategoriesMutation, useCreateProductsMutation } from "../../RTK/API/FakeAuth";
+import data from "../../Components/ProductCard/data";
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -24,15 +23,39 @@ const NavBar = () => {
   const [signout] = useLogoutMutation();
   const cart = useSelector(state => state.CartSlice.cart)
   const cookieNames = Object.keys(Cookies.get());
-  const Logout = async () => {
-    const bye = signout(token);
-    Cookies.remove("User");
-    cookieNames?.map(cookie =>{
-      Cookies.remove(cookie);
 
-    })
+  const Logout = async () => {
+
+    const bye = await signout(token);
+
+
+    cookieNames?.map(cookie =>{ Cookies.remove(cookie);})
+
     window.location.reload(true);
+
   };
+
+  useEffect(()=>{
+    
+  },[])
+  const {isLoading,filterProducts} = data()
+
+
+  const [searchText,setSearchText] = useState('')
+  const {Realproducts}  =filterProducts()
+
+  const products = Realproducts?.filter(data => data?.title.toLowerCase()?.includes(searchText) )
+
+  const searchHandler = (e)=>{  
+    e.preventDefault();
+
+   setSearchText(e.target.value)
+   console.log(searchText.length);
+    
+  }
+
+  console.log(products);
+   
   
 
   return (
@@ -46,7 +69,10 @@ const NavBar = () => {
       alignItems={"center"}
       padding={"3"}
     >
-      <Flex>
+      <Flex
+      alignItems={'center'}
+      gap={'4'}
+      >
 
         <Link href="/" rounded={'full'} w={'60px'} p={'0'}  >
         <svg width="100%" height="100%" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,9 +105,81 @@ const NavBar = () => {
     <feBlend mode="normal" in2="shape" result="effect1_innerShadow_1_5"/>
     </filter>
     </defs>
-    </svg>
+        </svg>
         </Link>
+        <FormControl
+        display={'flex'}
+        alignItems={'center'}
+        gap={'2'}
+        position={'relative'}
+        justifyContent={'flex-start'}
+        maxH={'80%'}
+        bg={'blackAlpha.700'}
+        px={'3'}
+        py={'0.7'}
+        rounded={'full'}
+        onChange={(e)=> searchHandler(e) }
+        >
+          
+        <Input
+        border={'none'}
+        bg={'transparent'}
+        outline={'none'}
+        _hover _focus _after _active _valid _firstLetter _focusVisible={{
+          border:'none'
+        }
+        }
+        rounded={'full'}
+        placeholder="Search on T-rash"
+        name="search" 
+        value={searchText}   />
+        {/* <Search2Icon 
+         /> */}
 
+        {
+           searchText.length >0 && products?.length >0 &&   <Flex
+           p={'2'}
+           gap={'3'}
+           position={'absolute'}
+           zIndex={'9999'}
+           bottom={'-400%'}
+           bg={'blackAlpha.800'}
+           maxH={'200px'}
+           minH={'200px'}
+           overflowY={'auto'}
+           flexDirection={'column'}
+           >
+           {
+             products?.map(item => {
+               return(
+                <Flex
+                gap={'2'}
+                 key={item.id+item.title} >
+                  <Image
+                  fallback={<SkeletonCircle
+                    w={'40px'}
+                    h={'40px'}
+                  />}
+                  w={'40px'}
+                  h={'40px'}
+                  rounded={'full'}
+
+                  src={item.images}
+                  />
+                    <Text> {item?.title} </Text>
+                </Flex>
+                 
+   
+               )
+             })
+           }
+           </Flex>
+        }
+        
+      
+       
+        </FormControl>
+        
       </Flex>
 
       <Flex alignItems={'center'} justify={'center'} gap={"3"}>
