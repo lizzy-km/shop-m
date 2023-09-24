@@ -2,4 +2,8 @@
 
 *{
   font-family: 'Raleway', sans-serif !important;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar{
+  display: none;
 }

@@ -2,7 +2,7 @@ import { Badge, Box, Button, Flex,  FormControl,  Icon,  Image,  Input,  Link, S
 import React, { useCallback, useEffect, useState } from "react";
 import { useLogoutMutation } from "../../RTK/API/Auth";
 import Cookies from "js-cookie";
-import { AddIcon, MoonIcon, Search2Icon, SunIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon, MoonIcon, Search2Icon, SmallCloseIcon, SunIcon } from "@chakra-ui/icons";
 import { HiShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import data from "../../Components/ProductCard/data";
@@ -114,6 +114,7 @@ const NavBar = () => {
         position={'relative'}
         justifyContent={'flex-start'}
         maxH={'80%'}
+        minH={'80%'}
         bg={'blackAlpha.700'}
         px={'3'}
         py={'0.7'}
@@ -133,23 +134,44 @@ const NavBar = () => {
         placeholder="Search on T-rash"
         name="search" 
         value={searchText}   />
-        {/* <Search2Icon 
-         /> */}
+        <SmallCloseIcon
+        color={'gray.400'}
+        onClick={()=> setSearchText('')}
+        cursor={'pointer'} 
+         />
 
         {
            searchText.length >0 && products?.length >0 &&   <Flex
            p={'2'}
+           rounded={'lg'}
+           scrollBehavior={'none'}
+           
            gap={'3'}
            position={'absolute'}
-           zIndex={'9999'}
-           bottom={'-400%'}
+           zIndex={'99'}
+           bottom={'-500%'}
            bg={'blackAlpha.800'}
            maxH={'200px'}
            minH={'200px'}
            overflowY={'auto'}
            flexDirection={'column'}
            >
-           {
+            <Flex
+            // p={'2'}
+            rounded={'lg'}
+            scrollBehavior={'none'}
+            
+            gap={'3'}
+            // position={'absolute'}
+            zIndex={'99'}
+            // bottom={'-500%'}
+            bg={'blackAlpha.800'}
+            maxH={'100%'}
+            minH={'100%'}
+            overflowY={'auto'}
+            flexDirection={'column'}
+            >
+              {
              products?.map(item => {
                return(
                 <Flex
@@ -173,6 +195,8 @@ const NavBar = () => {
                )
              })
            }
+            </Flex>
+           
            </Flex>
         }
         
